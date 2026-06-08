@@ -95,6 +95,7 @@ class Offer:
     section: str = ""  # "highlighted_partner" | "partner" from data-listtype
     in_stock: bool = False
     is_new: bool = False
+    url: str = ""  # shop offer link from the row anchor
 
 
 @dataclass
@@ -301,6 +302,8 @@ def parse_product_list_sections(html_text: str) -> list[Offer]:
                 row.get_text(" ", strip=True)[:240]
             )
             raw = collapse_ws(row.get_text(" ", strip=True))
+            href = row.get("href")
+            offer_url = href.strip() if isinstance(href, str) else ""
             offers.append(
                 Offer(
                     label=label,
@@ -314,6 +317,7 @@ def parse_product_list_sections(html_text: str) -> list[Offer]:
                     section=section,
                     in_stock=in_stock,
                     is_new=is_new,
+                    url=offer_url,
                 )
             )
     return offers
@@ -326,6 +330,12 @@ def matching_offers(offers: list[Offer]) -> list[Offer]:
         for o in offers
         if o.language == "magyar" and o.is_new and o.in_stock
     ]
+
+
+def top_offers(offers: list[Offer], limit: int = 3) -> list[Offer]:
+    candidates = [o for o in offers if o.price_huf is not None]
+    candidates.sort(key=lambda o: o.price_huf if o.price_huf is not None else 10**18)
+    return candidates[:limit]
 
 
 def best_offer(offers: list[Offer]) -> tuple[int | None, str | None, str | None]:
@@ -487,90 +497,82 @@ def compare_with_previous(current: GameResult, prev: dict[str, Any]) -> str:
     return "; ".join(parts)
 
 
+def _offer_link_html(offer: Offer, game_url: str) -> str:
+    url = offer.url or game_url
+    if not url:
+        return "—"
+    label = html.escape(offer.shop or "link")
+    return f'<a href="{html.escape(url)}">{label}</a>'
+
+
 def build_html_report(results: list[GameResult], state: dict[str, Any], run_at: str) -> str:
     rows = []
     for result in results:
         prev = state.get(result.url, {})
         delta = compare_with_previous(result, prev)
-        offers_summary = format_matching_offers_summary(
-            result.offer_count, result.matching_offers
+        game_cell = (
+            f'<strong>{html.escape(result.name)}</strong>'
+            f'<br><a href="{html.escape(result.url)}">compare</a>'
         )
-        if result.matching_offers:
-            offer_rows = []
-            for o in result.matching_offers:
-                shop = o.shop or o.label or "—"
-                title = o.title or "—"
-                offer_rows.append(
-                    "<tr>"
-                    f"<td style=\"padding:4px 8px;border:1px solid #eee;\">{html.escape(shop)}</td>"
-                    f"<td style=\"padding:4px 8px;border:1px solid #eee;\">{html.escape(title)}</td>"
-                    f"<td style=\"padding:4px 8px;border:1px solid #eee;\">{html.escape(section_label(o.section))}</td>"
-                    f"<td style=\"padding:4px 8px;border:1px solid #eee;\">{html.escape(fmt_price(o.price_huf))}</td>"
-                    "</tr>"
-                )
-            offers_html = (
-                '<table style="border-collapse:collapse;width:100%;font-size:12px;">'
-                "<thead><tr>"
-                '<th style="text-align:left;padding:4px 8px;border:1px solid #eee;">Shop</th>'
-                '<th style="text-align:left;padding:4px 8px;border:1px solid #eee;">Title</th>'
-                '<th style="text-align:left;padding:4px 8px;border:1px solid #eee;">Section</th>'
-                '<th style="text-align:left;padding:4px 8px;border:1px solid #eee;">Price</th>'
-                "</tr></thead><tbody>"
-                f"{''.join(offer_rows)}</tbody></table>"
-            )
-        else:
-            offers_html = html.escape(NO_MATCHING_OFFERS_MSG)
-        notes_html = "<br>".join(html.escape(n) for n in result.notes) if result.notes else "—"
-        error_html = ""
         if result.error:
-            error_html = (
-                f'<p style="color:#b00020;margin:0.5em 0 0 0;"><strong>Error:</strong> '
-                f"{html.escape(result.error)}</p>"
+            rows.append(
+                "<tr>"
+                f'<td style="padding:6px 8px;border:1px solid #ddd;">{game_cell}</td>'
+                '<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
+                '<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
+                f'<td style="padding:6px 8px;border:1px solid #ddd;color:#b00020;" colspan="2">'
+                f"{html.escape(result.error)}</td>"
+                "</tr>"
             )
-        rows.append(f"""
-        <tr>
-          <td style="padding:10px;border:1px solid #ddd;vertical-align:top;">
-            <strong>{html.escape(result.name)}</strong><br>
-            <span style="color:#666;">{html.escape(result.page_title or result.url)}</span><br>
-            <a href="{html.escape(result.url)}">{html.escape(result.url)}</a>
-            {error_html}
-          </td>
-          <td style="padding:10px;border:1px solid #ddd;vertical-align:top;">{html.escape(fmt_price(result.best_price_huf))}</td>
-          <td style="padding:10px;border:1px solid #ddd;vertical-align:top;">{html.escape(result.best_availability or "—")}</td>
-          <td style="padding:10px;border:1px solid #ddd;vertical-align:top;">{html.escape(result.best_condition or "—")}</td>
-          <td style="padding:10px;border:1px solid #ddd;vertical-align:top;">{html.escape(offers_summary)}</td>
-          <td style="padding:10px;border:1px solid #ddd;vertical-align:top;">{html.escape(delta)}</td>
-          <td style="padding:10px;border:1px solid #ddd;vertical-align:top;">{offers_html}</td>
-          <td style="padding:10px;border:1px solid #ddd;vertical-align:top;">{notes_html}</td>
-        </tr>
-        """)
+            continue
+
+        offers = top_offers(result.matching_offers)
+        if not offers:
+            rows.append(
+                "<tr>"
+                f'<td style="padding:6px 8px;border:1px solid #ddd;">{game_cell}</td>'
+                '<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
+                '<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
+                f'<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
+                f'<td style="padding:6px 8px;border:1px solid #ddd;color:#666;">'
+                f"{html.escape(NO_MATCHING_OFFERS_MSG)}</td>"
+                "</tr>"
+            )
+            continue
+
+        for i, offer in enumerate(offers):
+            game_col = game_cell if i == 0 else ""
+            delta_col = html.escape(delta) if i == 0 else ""
+            rows.append(
+                "<tr>"
+                f'<td style="padding:6px 8px;border:1px solid #ddd;vertical-align:top;">{game_col}</td>'
+                f'<td style="padding:6px 8px;border:1px solid #ddd;">{html.escape(fmt_price(offer.price_huf))}</td>'
+                f'<td style="padding:6px 8px;border:1px solid #ddd;">{html.escape(offer.availability or "—")}</td>'
+                f'<td style="padding:6px 8px;border:1px solid #ddd;">{_offer_link_html(offer, result.url)}</td>'
+                f'<td style="padding:6px 8px;border:1px solid #ddd;color:#666;font-size:12px;">{delta_col}</td>'
+                "</tr>"
+            )
 
     return f"""\
 <!doctype html>
 <html>
-  <body style="font-family:Arial,Helvetica,sans-serif;line-height:1.45;color:#222;">
+  <body style="font-family:Arial,Helvetica,sans-serif;line-height:1.4;color:#222;">
     <h2 style="margin-bottom:0.2em;">Daily board-game price report</h2>
     <div style="color:#666;margin-bottom:1em;">Run at {html.escape(run_at)}</div>
-    <table style="border-collapse:collapse;width:100%;font-size:14px;">
+    <table style="border-collapse:collapse;width:100%;font-size:13px;">
       <thead>
         <tr>
-          <th style="text-align:left;padding:10px;border:1px solid #ddd;">Game</th>
-          <th style="text-align:left;padding:10px;border:1px solid #ddd;">Best price</th>
-          <th style="text-align:left;padding:10px;border:1px solid #ddd;">Best availability</th>
-          <th style="text-align:left;padding:10px;border:1px solid #ddd;">Best condition</th>
-          <th style="text-align:left;padding:10px;border:1px solid #ddd;">Matching offers</th>
-          <th style="text-align:left;padding:10px;border:1px solid #ddd;">Change vs last run</th>
-          <th style="text-align:left;padding:10px;border:1px solid #ddd;">Filtered offers (shop / title / section / price)</th>
-          <th style="text-align:left;padding:10px;border:1px solid #ddd;">Availability notes</th>
+          <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Game</th>
+          <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Price</th>
+          <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Availability</th>
+          <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Link</th>
+          <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Change</th>
         </tr>
       </thead>
       <tbody>
         {"".join(rows)}
       </tbody>
     </table>
-    <p style="color:#666;margin-top:1em;">
-      This report is generated automatically. Add more games by appending items to <code>games</code> in the YAML config.
-    </p>
   </body>
 </html>
 """
@@ -581,42 +583,24 @@ def build_text_report(results: list[GameResult], state: dict[str, Any], run_at: 
     for result in results:
         prev = state.get(result.url, {})
         delta = compare_with_previous(result, prev)
-        offers_summary = format_matching_offers_summary(
-            result.offer_count, result.matching_offers
-        )
-        lines.extend(
-            [
-                f"Game: {result.name}",
-                f"Page title: {result.page_title or '—'}",
-                f"URL: {result.url}",
-            ]
-        )
+        lines.append(f"{result.name} — {result.url}")
         if result.error:
-            lines.append(f"Error: {result.error}")
-        lines.extend(
-            [
-                f"Best price: {fmt_price(result.best_price_huf)}",
-                f"Best availability: {result.best_availability or '—'}",
-                f"Best condition: {result.best_condition or '—'}",
-                f"Matching offers: {offers_summary}",
-                f"Change vs last run: {delta}",
-                "Filtered offers (shop | title | section | price):",
-            ]
-        )
-        if result.matching_offers:
-            for offer in result.matching_offers:
-                shop = offer.shop or offer.label or "—"
-                title = offer.title or "—"
-                lines.append(
-                    f"  - {shop} | {title} | {section_label(offer.section)} | "
-                    f"{fmt_price(offer.price_huf)}"
-                )
+            lines.append(f"  Error: {result.error}")
+            lines.append("")
+            continue
+
+        offers = top_offers(result.matching_offers)
+        if not offers:
+            lines.append(f"  {NO_MATCHING_OFFERS_MSG}")
         else:
-            lines.append(f"  - {NO_MATCHING_OFFERS_MSG}")
-        if result.notes:
-            lines.append("Availability notes:")
-            for note in result.notes:
-                lines.append(f"  - {note}")
+            for offer in offers:
+                link = offer.url or result.url
+                shop = offer.shop or "shop"
+                lines.append(
+                    f"  {fmt_price(offer.price_huf)} | {offer.availability or '—'} | "
+                    f"{shop}: {link}"
+                )
+        lines.append(f"  Change: {delta}")
         lines.append("")
     return "\n".join(lines)
 
