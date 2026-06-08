@@ -1,0 +1,37 @@
+# Copy to config.yaml and fill in real values. Keep config.yaml out of version control.
+#
+# Required top-level keys: games, smtp
+# Optional: state_path, subject
+
+# Product pages to watch (each entry is a mapping).
+games:
+  # name: optional; shown in the email. If omitted, the URL is used as the label.
+  - name: "Wingspan"
+    # url: required; full HTTPS URL of the tarsasjatekok.com (or compatible) product page.
+    url: "https://tarsasjatekok.com/..."
+  - name: "Pandemic"
+    url: "https://tarsasjatekok.com/..."
+
+# Outgoing mail settings (all values below are examples).
+smtp:
+  # host: SMTP server hostname (e.g. smtp.gmail.com).
+  host: smtp.gmail.com
+  # port: SMTP port; defaults to 587 if omitted.
+  port: 587
+  # use_tls: call STARTTLS after connect; defaults to true if omitted.
+  use_tls: true
+  # username: if set, the client logs in with username + password.
+  username: you@gmail.com
+  # password: app password or account password (prefer app passwords for Gmail).
+  password: "app-password-here"
+  # from: envelope/display From address (required).
+  from: you@gmail.com
+  # to: one recipient (string) or several (list of strings).
+  to:
+    - recipient@example.com
+
+# state_path: optional JSON file used to compare prices/status between runs; defaults to state.json.
+state_path: state.json
+
+# subject: optional email subject; if omitted, a default like "Daily board-game report — YYYY-MM-DD" is used.
+subject: "Daily board-game report"
