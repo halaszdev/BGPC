@@ -27,6 +27,7 @@ import argparse
 import html
 import json
 import logging
+import os
 import re
 import smtplib
 from dataclasses import dataclass
@@ -39,6 +40,7 @@ import requests
 import yaml
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
@@ -132,6 +134,37 @@ def load_config(path: Path) -> dict[str, Any]:
         if not isinstance(game["url"], str) or not game["url"].strip():
             raise ValueError(f"games[{i}] 'url' must be a non-empty string.")
     return cfg
+
+
+def load_dotenv_for_config(config_path: Path) -> None:
+    """Try .env next to the config file, then in the current working directory."""
+    for candidate in (config_path.resolve().parent / ".env", Path(".env")):
+        if load_dotenv(candidate, override=False):
+            return
+
+
+def apply_smtp_env_overrides(cfg: dict[str, Any]) -> None:
+    """Apply SMTP_* environment variables to cfg['smtp']; validate login credentials."""
+    smtp = cfg["smtp"]
+
+    if host := os.environ.get("SMTP_HOST"):
+        smtp["host"] = host
+    if username := os.environ.get("SMTP_USERNAME"):
+        smtp["username"] = username
+    if password := os.environ.get("SMTP_PASSWORD"):
+        smtp["password"] = password
+    if from_addr := os.environ.get("SMTP_FROM"):
+        smtp["from"] = from_addr
+    if to_addrs := os.environ.get("SMTP_TO"):
+        smtp["to"] = [addr.strip() for addr in to_addrs.split(",") if addr.strip()]
+
+    username = smtp.get("username")
+    if username and not smtp.get("password"):
+        raise ValueError(
+            "SMTP login is configured (smtp.username is set) but no password was "
+            "provided. Set the SMTP_PASSWORD environment variable or omit smtp.username "
+            "for servers that do not require authentication."
+        )
 
 
 def fetch_page(url: str, timeout: int = DEFAULT_TIMEOUT) -> str:
@@ -640,7 +673,9 @@ def main() -> int:
     )
     args = parser.parse_args()
 
+    load_dotenv_for_config(args.config)
     cfg = load_config(args.config)
+    apply_smtp_env_overrides(cfg)
     state_path = Path(cfg.get("state_path", "state.json"))
     state = load_state(state_path)
 

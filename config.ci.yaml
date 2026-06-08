@@ -1,0 +1,15 @@
+games:
+  - name: "Dune"
+    url: "https://tarsasjatekok.com/tarsasjatek/dune-imperium-felkeles-2023"
+
+smtp:
+  host: smtp.gmail.com
+  port: 587
+  use_tls: true
+  username: boardgamepricecheck@gmail.com
+  from: boardgamepricecheck@gmail.com
+  to:
+    - jatekokra0913@gmail.com
+
+state_path: state.json
+subject: "Daily board-game report"

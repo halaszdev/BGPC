@@ -1,0 +1,44 @@
+name: Game watch
+
+# Schedule + manual dispatch only. Do not add pull_request — fork PRs could run
+# workflows with access to repository secrets (e.g. SMTP_PASSWORD).
+on:
+  schedule:
+    # ~08:00 & ~20:00 Hungary (CEST); UTC cron does not follow DST.
+    - cron: "0 6,18 * * *"
+  workflow_dispatch:
+
+# Minimum scope: read checkout + push state.json updates. No packages, id-token, etc.
+permissions:
+  contents: write
+
+concurrency:
+  group: game-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      - name: Use CI config
+        run: cp config.ci.yaml config.yaml
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Run price watcher
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: uv run python game_watch.py --config config.yaml
+
+      - name: Commit state changes
+        uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842 # v5.0.1
+        with:
+          commit_message: "Update price watch state"
+          file_pattern: state.json
