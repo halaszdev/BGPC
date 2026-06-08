@@ -8,8 +8,6 @@ smtp:
   use_tls: true
   username: boardgamepricecheck@gmail.com
   from: boardgamepricecheck@gmail.com
-  to:
-    - jatekokra0913@gmail.com
 
 state_path: state.json
 subject: "Daily board-game report"

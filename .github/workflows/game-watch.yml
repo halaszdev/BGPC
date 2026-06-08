@@ -1,7 +1,7 @@
 name: Game watch
 
 # Schedule + manual dispatch only. Do not add pull_request — fork PRs could run
-# workflows with access to repository secrets (e.g. SMTP_PASSWORD).
+# workflows with access to repository secrets (e.g. SMTP_PASSWORD, SMTP_TO).
 on:
   schedule:
     # ~08:00 & ~20:00 Hungary (CEST); UTC cron does not follow DST.
@@ -35,6 +35,7 @@ jobs:
       - name: Run price watcher
         env:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_TO: ${{ secrets.SMTP_TO }}
         run: uv run python game_watch.py --config config.yaml
 
       - name: Commit state changes

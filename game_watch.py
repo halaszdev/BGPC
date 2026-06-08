@@ -158,6 +158,12 @@ def apply_smtp_env_overrides(cfg: dict[str, Any]) -> None:
     if to_addrs := os.environ.get("SMTP_TO"):
         smtp["to"] = [addr.strip() for addr in to_addrs.split(",") if addr.strip()]
 
+    if not smtp.get("to"):
+        raise ValueError(
+            "No email recipients configured. Set the SMTP_TO environment variable "
+            "(comma-separated list); do not store recipient addresses in config YAML."
+        )
+
     username = smtp.get("username")
     if username and not smtp.get("password"):
         raise ValueError(

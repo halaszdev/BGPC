@@ -1,7 +1,7 @@
 # Copy to config.yaml and fill in real values. Keep config.yaml out of version control.
 #
-# SMTP password: copy .env.example to .env and set SMTP_PASSWORD (do not put it in this file).
-# GitHub Actions uses the committed config.ci.yaml (same structure, no secrets) plus SMTP_PASSWORD secret.
+# Secrets: copy .env.example to .env and set SMTP_PASSWORD and SMTP_TO (do not put them in this file).
+# GitHub Actions uses the committed config.ci.yaml (same structure, no secrets) plus GitHub Secrets.
 #
 # Required top-level keys: games, smtp
 # Optional: state_path, subject
@@ -28,9 +28,7 @@ smtp:
   # password: set SMTP_PASSWORD in .env (or the environment); do not store here.
   # from: envelope/display From address (required).
   from: you@gmail.com
-  # to: one recipient (string) or several (list of strings).
-  to:
-    - recipient@example.com
+  # to: set SMTP_TO in .env (comma-separated); do not store recipient addresses here.
 
 # state_path: optional JSON file used to compare prices/status between runs; defaults to state.json.
 state_path: state.json
