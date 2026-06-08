@@ -558,7 +558,6 @@ def build_html_report(results: list[GameResult], state: dict[str, Any], run_at: 
                 "<tr>"
                 f'<td style="padding:6px 8px;border:1px solid #ddd;">{game_cell}</td>'
                 '<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
-                '<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
                 f'<td style="padding:6px 8px;border:1px solid #ddd;color:#b00020;" colspan="2">'
                 f"{html.escape(result.error)}</td>"
                 "</tr>"
@@ -570,7 +569,6 @@ def build_html_report(results: list[GameResult], state: dict[str, Any], run_at: 
             rows.append(
                 "<tr>"
                 f'<td style="padding:6px 8px;border:1px solid #ddd;">{game_cell}</td>'
-                '<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
                 '<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
                 f'<td style="padding:6px 8px;border:1px solid #ddd;">—</td>'
                 f'<td style="padding:6px 8px;border:1px solid #ddd;color:#666;">'
@@ -586,7 +584,6 @@ def build_html_report(results: list[GameResult], state: dict[str, Any], run_at: 
                 "<tr>"
                 f'<td style="padding:6px 8px;border:1px solid #ddd;vertical-align:top;">{game_col}</td>'
                 f'<td style="padding:6px 8px;border:1px solid #ddd;">{html.escape(fmt_price(offer.price_huf))}</td>'
-                f'<td style="padding:6px 8px;border:1px solid #ddd;">{html.escape(offer.availability or "—")}</td>'
                 f'<td style="padding:6px 8px;border:1px solid #ddd;">{_offer_link_html(offer, result.url)}</td>'
                 f'<td style="padding:6px 8px;border:1px solid #ddd;color:#666;font-size:12px;">{delta_col}</td>'
                 "</tr>"
@@ -603,7 +600,6 @@ def build_html_report(results: list[GameResult], state: dict[str, Any], run_at: 
         <tr>
           <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Game</th>
           <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Price</th>
-          <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Availability</th>
           <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Link</th>
           <th style="text-align:left;padding:6px 8px;border:1px solid #ddd;">Change</th>
         </tr>
@@ -635,10 +631,7 @@ def build_text_report(results: list[GameResult], state: dict[str, Any], run_at: 
             for offer in offers:
                 link = offer.url or result.url
                 shop = offer.shop or "shop"
-                lines.append(
-                    f"  {fmt_price(offer.price_huf)} | {offer.availability or '—'} | "
-                    f"{shop}: {link}"
-                )
+                lines.append(f"  {fmt_price(offer.price_huf)} | {shop}: {link}")
         lines.append(f"  Change: {delta}")
         lines.append("")
     return "\n".join(lines)
