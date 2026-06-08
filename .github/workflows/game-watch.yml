@@ -4,8 +4,8 @@ name: Game watch
 # workflows with access to repository secrets (e.g. SMTP_PASSWORD, SMTP_TO).
 on:
   schedule:
-    # ~08:00 & ~20:00 Hungary (CEST); UTC cron does not follow DST.
-    - cron: "0 6,18 * * *"
+    # Every 3 h, :17 UTC, ~06:17–21:17 Hungary (CEST); off the hour avoids :00 drops.
+    - cron: "17 4,7,10,13,16,19 * * *"
   workflow_dispatch:
 
 # Minimum scope: read checkout + push state.json updates. No packages, id-token, etc.
