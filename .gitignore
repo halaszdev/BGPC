@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local configuration (secrets); use config.yaml.example as a template
+config.yaml
