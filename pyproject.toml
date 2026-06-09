@@ -3,7 +3,7 @@ name = "bgpc"
 version = "0.1.0"
 description = "Daily board-game price watcher for tarsasjatekok.com"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.15.0",
     "python-dotenv>=1.0.0",
