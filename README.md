@@ -72,11 +72,14 @@ Prerequisites: `config.yaml`, `.env`, and `uv` on PATH (or in a standard install
 # Signed-in only — no password stored
 .\scripts\register-scheduled-task.ps1 -InteractiveOnly
 
-# Test without sending email
+# Scheduled dry-run — fetches prices, logs only, no email (task: BGPC-GameWatch-DryRun)
+.\scripts\register-scheduled-task.ps1 -DryRun
+
+# One-off test without sending email
 .\scripts\run-game-watch.ps1 -DryRun
 ```
 
-- Task name: `BGPC-GameWatch` (customize with `-TaskName`)
+- Task name: `BGPC-GameWatch` by default (`BGPC-GameWatch-DryRun` with `-DryRun`; override with `-TaskName`)
 - Interval: 10 minutes by default (`-IntervalMinutes 60` for hourly)
 - Logs: `logs/game-watch.log` (gitignored)
 - Remove: `Unregister-ScheduledTask -TaskName BGPC-GameWatch -Confirm:$false`
