@@ -1,12 +1,15 @@
 # Registers a Windows scheduled task that runs game_watch every N minutes.
 # Run once from an elevated or normal PowerShell prompt:
 #   .\scripts\register-scheduled-task.ps1
+# Run only while signed in (no stored password):
+#   .\scripts\register-scheduled-task.ps1 -InteractiveOnly
 # Remove with:
 #   Unregister-ScheduledTask -TaskName BGPC-GameWatch -Confirm:$false
 
 param(
     [int]$IntervalMinutes = 10,
-    [string]$TaskName = "BGPC-GameWatch"
+    [string]$TaskName = "BGPC-GameWatch",
+    [switch]$InteractiveOnly
 )
 
 $ErrorActionPreference = "Stop"
@@ -45,14 +48,38 @@ if ($existing) {
     Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false
 }
 
-Register-ScheduledTask `
-    -TaskName $TaskName `
-    -Action $action `
-    -Trigger $trigger `
-    -Settings $settings `
-    -Description "BGPC board-game price watcher (every $IntervalMinutes min)" | Out-Null
+$taskParams = @{
+    TaskName    = $TaskName
+    Action      = $action
+    Trigger     = $trigger
+    Settings    = $settings
+    Description = "BGPC board-game price watcher (every $IntervalMinutes min)"
+}
 
-Write-Host "Registered '$TaskName' — every $IntervalMinutes minutes."
+if ($InteractiveOnly) {
+    Register-ScheduledTask @taskParams | Out-Null
+    $runMode = "only when you are signed in"
+} else {
+    $account = if ($env:USERDOMAIN -and $env:USERDOMAIN -ne $env:COMPUTERNAME) {
+        "$env:USERDOMAIN\$env:USERNAME"
+    } else {
+        $env:USERNAME
+    }
+    $cred = Get-Credential -UserName $account -Message @"
+Enter your Windows password so the task can run when you are signed out.
+Stored locally by Task Scheduler (not in this repo).
+"@
+    if (-not $cred) {
+        throw "Registration cancelled — password required for signed-out runs."
+    }
+
+    $taskParams.User = $cred.UserName
+    $taskParams.Password = $cred.GetNetworkCredential().Password
+    Register-ScheduledTask @taskParams | Out-Null
+    $runMode = "whether you are signed in or not"
+}
+
+Write-Host "Registered '$TaskName' — every $IntervalMinutes minutes, $runMode."
 Write-Host "Repo:    $RepoRoot"
 Write-Host "Runner:  $Runner"
 Write-Host "Logs:    $(Join-Path $RepoRoot 'logs\game-watch.log')"

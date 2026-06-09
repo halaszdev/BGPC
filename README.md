@@ -66,8 +66,11 @@ GitHub Actions scheduled workflows are **unreliable** for frequent checks: runs 
 Prerequisites: `config.yaml`, `.env`, and `uv` on PATH (or in a standard install location).
 
 ```powershell
-# One-time: register a task that runs every 10 minutes
+# One-time: register a task that runs every 10 minutes (prompts for Windows password)
 .\scripts\register-scheduled-task.ps1
+
+# Signed-in only — no password stored
+.\scripts\register-scheduled-task.ps1 -InteractiveOnly
 
 # Test without sending email
 .\scripts\run-game-watch.ps1 -DryRun
@@ -78,7 +81,7 @@ Prerequisites: `config.yaml`, `.env`, and `uv` on PATH (or in a standard install
 - Logs: `logs/game-watch.log` (gitignored)
 - Remove: `Unregister-ScheduledTask -TaskName BGPC-GameWatch -Confirm:$false`
 
-The task runs while you are logged in. If the PC sleeps, missed runs are picked up when it wakes (`StartWhenAvailable`).
+By default the task runs whether you are signed in or not. If the PC sleeps, missed runs are picked up when it wakes (`StartWhenAvailable`).
 
 ### Linux / macOS
 
