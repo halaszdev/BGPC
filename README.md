@@ -61,7 +61,7 @@ uv run python game_watch.py --config config.yaml --dry-run
 
 The [game-watch workflow](.github/workflows/game-watch.yml) runs automatically and can be triggered manually.
 
-**Schedule:** cron `17 4,7,10,13,16,19 * * *` (UTC) — every **3 hours** during daytime only (**~06:17–21:17** Hungary in CEST, UTC+2). Runs at **:17** past the hour to avoid :00 peak load. GitHub cron uses UTC and does **not** follow daylight saving time, so local run times shift by one hour when clocks change.
+**Schedule:** cron `*/10 * * * *` (UTC) — every **10 minutes**. GitHub cron uses UTC and does **not** follow daylight saving time, so local run times shift by one hour when clocks change.
 
 **Manual run:** **Actions → Game watch → Run workflow**.
 
