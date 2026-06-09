@@ -57,15 +57,54 @@ uv run python game_watch.py --config config.yaml
 uv run python game_watch.py --config config.yaml --dry-run
 ```
 
-## GitHub Actions
+## Schedule (recommended: Windows Task Scheduler)
 
-The [game-watch workflow](.github/workflows/game-watch.yml) runs automatically and can be triggered manually.
+GitHub Actions scheduled workflows are **unreliable** for frequent checks: runs can be delayed by hours, disabled after repo inactivity, or blocked by org/repo settings. For a machine that is usually on, **local scheduling is more dependable**.
 
-**Schedule:** cron `*/10 * * * *` (UTC) — every **10 minutes**. GitHub cron uses UTC and does **not** follow daylight saving time, so local run times shift by one hour when clocks change.
+### Windows
+
+Prerequisites: `config.yaml`, `.env`, and `uv` on PATH (or in a standard install location).
+
+```powershell
+# One-time: register a task that runs every 10 minutes
+.\scripts\register-scheduled-task.ps1
+
+# Test without sending email
+.\scripts\run-game-watch.ps1 -DryRun
+```
+
+- Task name: `BGPC-GameWatch` (customize with `-TaskName`)
+- Interval: 10 minutes by default (`-IntervalMinutes 60` for hourly)
+- Logs: `logs/game-watch.log` (gitignored)
+- Remove: `Unregister-ScheduledTask -TaskName BGPC-GameWatch -Confirm:$false`
+
+The task runs while you are logged in. If the PC sleeps, missed runs are picked up when it wakes (`StartWhenAvailable`).
+
+### Linux / macOS
+
+Use cron or a systemd timer, pointing at the same command:
+
+```bash
+*/10 * * * * cd /path/to/BGPC && uv run python game_watch.py --config config.yaml >> logs/game-watch.log 2>&1
+```
+
+## GitHub Actions (optional)
+
+The [game-watch workflow](.github/workflows/game-watch.yml) can run on a schedule or manually, but treat it as a backup — not the primary scheduler.
 
 **Manual run:** **Actions → Game watch → Run workflow**.
 
 The job copies `config.ci.yaml` to `config.yaml`, runs the watcher with `SMTP_PASSWORD` and `SMTP_TO` from secrets, then commits `state.json` if prices changed.
+
+**If scheduled runs never appear:**
+
+1. **Settings → Actions → General** — ensure Actions are enabled.
+2. **Settings → Secrets and variables → Actions** — add `SMTP_PASSWORD` and `SMTP_TO` (manual runs fail without these).
+3. Workflow must live on the **default branch** (`main`).
+4. GitHub does not guarantee cron timing; `*/10` may actually run much less often during load.
+5. On **public** repos, scheduled workflows are disabled after **60 days** without repository activity.
+
+**Schedule:** cron `*/10 * * * *` (UTC). GitHub cron does not follow daylight saving time.
 
 ## Security
 

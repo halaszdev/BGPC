@@ -219,3 +219,6 @@ __marimo__/
 
 # Local configuration (secrets); use config.yaml.example as a template
 config.yaml
+
+# Scheduled-run logs (scripts/run-game-watch.ps1)
+logs/
