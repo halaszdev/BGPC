@@ -57,6 +57,22 @@ uv run python game_watch.py --config config.yaml
 uv run python game_watch.py --config config.yaml --dry-run
 ```
 
+## Scripts
+
+These helper scripts live under `scripts/` and are the quickest way to set up or run the watcher on Windows:
+
+```powershell
+.\scripts\register-scheduled-task.ps1
+.\scripts\register-scheduled-task.ps1 -InteractiveOnly
+.\scripts\register-scheduled-task.ps1 -DryRun
+.\scripts\run-game-watch.ps1 -DryRun
+```
+
+- `register-scheduled-task.ps1` creates or updates the scheduled task that runs the watcher every 10 minutes by default.
+- `-InteractiveOnly` runs the task only when you are signed in, so Windows does not need to store a password.
+- `-DryRun` uses the dry-run task name and logs results without sending email.
+- `run-game-watch.ps1 -DryRun` is the one-off local smoke test.
+
 ## Schedule (recommended: Windows Task Scheduler)
 
 GitHub Actions scheduled workflows are **unreliable** for frequent checks: runs can be delayed by hours, disabled after repo inactivity, or blocked by org/repo settings. For a machine that is usually on, **local scheduling is more dependable**.
