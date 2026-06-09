@@ -27,7 +27,7 @@ jobs:
         run: cp config.ci.yaml config.yaml
 
       - name: Install uv
-        uses: uses: astral-sh/setup-uv@v8.2.0
+        uses: astral-sh/setup-uv@v8.2.0
 
       - name: Install dependencies
         run: uv sync --frozen
