@@ -1,6 +1,6 @@
 {
   "https://tarsasjatekok.com/tarsasjatek/dune-imperium-felkeles-2023": {
-    "name": "Dune",
+    "name": "Dűne: Impérium - Felkelés",
     "page_title": "Dűne: Impérium – Felkelés társasjáték",
     "best_price_huf": 23115,
     "best_availability": "raktáron",
@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 11,
     "new_available_count": 3,
-    "last_seen": "2026-06-10T21:24:30.860794+00:00"
+    "last_seen": "2026-06-11T12:28:12.223204+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/klank-katakombak-2022": {
     "name": "Klank! Katakombák",
@@ -19,7 +19,7 @@
     "best_status": "raktáron új",
     "offer_count": 14,
     "new_available_count": 9,
-    "last_seen": "2026-06-10T21:24:32.088770+00:00"
+    "last_seen": "2026-06-11T12:28:13.776273+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-gyuruk-ura-parbaj-kozepfoldeert-2024": {
     "name": "Gyűrűk Ura: Párbaj Középföldért",
@@ -30,6 +30,17 @@
     "best_status": "raktáron új",
     "offer_count": 15,
     "new_available_count": 9,
-    "last_seen": "2026-06-10T21:24:33.831787+00:00"
+    "last_seen": "2026-06-11T12:28:15.713137+00:00"
+  },
+  "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
+    "name": "Világrend",
+    "page_title": "Világrend társasjáték",
+    "best_price_huf": 23490,
+    "best_availability": "raktáron",
+    "best_condition": "új",
+    "best_status": "raktáron új",
+    "offer_count": 8,
+    "new_available_count": 6,
+    "last_seen": "2026-06-11T12:28:16.380612+00:00"
   }
 }
