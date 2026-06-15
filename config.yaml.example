@@ -4,7 +4,7 @@
 # GitHub Actions uses the committed config.ci.yaml (same structure, no secrets) plus GitHub Secrets.
 #
 # Required top-level keys: games, smtp
-# Optional: state_path, subject
+# Optional: state_path, subject, price_history_days
 
 # Product pages to watch (each entry is a mapping).
 games:
@@ -35,3 +35,6 @@ state_path: state.json
 
 # subject: optional email subject; if omitted, a default like "Daily board-game report — YYYY-MM-DD" is used.
 subject: "Daily board-game report"
+
+# price_history_days: how many days of best-price history to keep and show in the email chart (default: 30).
+# price_history_days: 30

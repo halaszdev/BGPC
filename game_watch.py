@@ -7,6 +7,7 @@ What it does:
 - Fetches each page once per run.
 - Extracts visible text, tries to identify offers, prices, and availability cues.
 - Keeps a small JSON state file so the email can mention changes since the last run.
+- Records a rolling best-price history and embeds a chart in the HTML email.
 - Sends a report-style email via SMTP.
 
 Install:
@@ -24,15 +25,19 @@ Schedule daily with cron / Task Scheduler / systemd timer.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
+import io
 import json
 import logging
 import os
 import re
 import smtplib
 from dataclasses import dataclass
-from datetime import UTC, datetime
-from email.message import EmailMessage
+from datetime import UTC, datetime, timedelta
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from pathlib import Path
 from typing import Any
 
@@ -41,12 +46,14 @@ import yaml
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from dotenv import load_dotenv
+from PIL import Image, ImageDraw, ImageFont
 
 logger = logging.getLogger(__name__)
 
 
 UA = "Mozilla/5.0 (compatible; GameWatch/1.0; +https://example.com)"
 DEFAULT_TIMEOUT = 25
+DEFAULT_PRICE_HISTORY_DAYS = 30
 
 
 # Grouped thousands (e.g. "12 345"); avoids loose digit runs like \d[\d\s]{2,}.
@@ -474,6 +481,177 @@ def save_state(path: Path, state: dict[str, Any]) -> None:
         json.dump(state, f, ensure_ascii=False, indent=2)
 
 
+def _history_cutoff_date(days: int) -> str:
+    cutoff = datetime.now(UTC).date() - timedelta(days=max(days - 1, 0))
+    return cutoff.isoformat()
+
+
+def seed_price_history(entry: dict[str, Any]) -> list[dict[str, Any]]:
+    history = list(entry.get("price_history") or [])
+    if history:
+        return history
+    price = entry.get("best_price_huf")
+    last_seen = entry.get("last_seen")
+    if price is not None and isinstance(last_seen, str) and len(last_seen) >= 10:
+        return [{"date": last_seen[:10], "price_huf": int(price)}]
+    return []
+
+
+def trim_price_history(history: list[dict[str, Any]], days: int) -> list[dict[str, Any]]:
+    cutoff = _history_cutoff_date(days)
+    return [point for point in history if str(point.get("date", "")) >= cutoff]
+
+
+def append_price_history_point(
+    history: list[dict[str, Any]],
+    price_huf: int | None,
+    fetched_at: str,
+    *,
+    days: int,
+) -> list[dict[str, Any]]:
+    trimmed = trim_price_history(history, days)
+    if price_huf is None:
+        return trimmed
+    day = fetched_at[:10]
+    point = {"date": day, "price_huf": price_huf}
+    if trimmed and trimmed[-1].get("date") == day:
+        trimmed[-1] = point
+    else:
+        trimmed.append(point)
+    return trim_price_history(trimmed, days)
+
+
+def price_history_for_report(
+    entry: dict[str, Any],
+    result: GameResult,
+    *,
+    days: int,
+) -> list[dict[str, Any]]:
+    history = seed_price_history(entry)
+    return append_price_history_point(history, result.best_price_huf, result.fetched_at, days=days)
+
+
+def chart_cid_for_url(url: str) -> str:
+    digest = hashlib.sha256(url.encode()).hexdigest()[:12]
+    return f"chart-{digest}"
+
+
+def _format_chart_price(value: int) -> str:
+    return f"{value:,}".replace(",", " ")
+
+
+def render_price_chart_png(
+    points: list[dict[str, Any]],
+    *,
+    title: str = "",
+    width: int = 480,
+    height: int = 140,
+) -> bytes:
+    parsed: list[tuple[int, int]] = []
+    dates: list[str] = []
+    for point in points:
+        price = point.get("price_huf")
+        date = point.get("date")
+        if price is None or not date:
+            continue
+        parsed.append((len(parsed), int(price)))
+        dates.append(str(date))
+
+    if not parsed:
+        raise ValueError("price chart requires at least one point")
+
+    img = Image.new("RGB", (width, height), "white")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.load_default()
+
+    margin_l, margin_r, margin_t, margin_b = 56, 12, 18, 28
+    plot_w = width - margin_l - margin_r
+    plot_h = height - margin_t - margin_b
+
+    prices = [price for _, price in parsed]
+    min_p = min(prices)
+    max_p = max(prices)
+    if min_p == max_p:
+        pad = max(int(min_p * 0.05), 500)
+        min_p = max(0, min_p - pad)
+        max_p = max_p + pad
+
+    def y_for_price(price: int) -> float:
+        if max_p == min_p:
+            return margin_t + plot_h / 2
+        return margin_t + plot_h * (1 - (price - min_p) / (max_p - min_p))
+
+    def x_for_idx(idx: int) -> float:
+        if len(parsed) == 1:
+            return margin_l + plot_w / 2
+        return margin_l + plot_w * idx / (len(parsed) - 1)
+
+    plot_right = margin_l + plot_w
+    plot_bottom = margin_t + plot_h
+    draw.rectangle([margin_l, margin_t, plot_right, plot_bottom], outline="#dddddd")
+
+    coords = [(x_for_idx(idx), y_for_price(price)) for idx, price in parsed]
+    if len(coords) >= 2:
+        draw.line(coords, fill="#2563eb", width=2)
+    for x, y in coords:
+        draw.ellipse([x - 3, y - 3, x + 3, y + 3], fill="#2563eb", outline="#1d4ed8")
+
+    draw.text((4, margin_t + plot_h - 6), _format_chart_price(min_p), fill="#666666", font=font)
+    draw.text((4, margin_t - 6), _format_chart_price(max_p), fill="#666666", font=font)
+
+    if dates:
+        draw.text((margin_l, height - 16), dates[0][5:], fill="#666666", font=font)
+        if len(dates) > 1:
+            mid = dates[len(dates) // 2][5:]
+            draw.text((margin_l + plot_w / 2 - 14, height - 16), mid, fill="#666666", font=font)
+            draw.text((plot_right - 36, height - 16), dates[-1][5:], fill="#666666", font=font)
+
+    if title:
+        draw.text((margin_l, 2), title[:48], fill="#333333", font=font)
+
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def build_price_charts(
+    results: list[GameResult],
+    state: dict[str, Any],
+    *,
+    days: int,
+) -> dict[str, bytes]:
+    charts: dict[str, bytes] = {}
+    for result in results:
+        if result.error or result.best_price_huf is None:
+            continue
+        history = price_history_for_report(state.get(result.url, {}), result, days=days)
+        if not history:
+            continue
+        cid = chart_cid_for_url(result.url)
+        charts[cid] = render_price_chart_png(history, title=result.name)
+    return charts
+
+
+def summarize_price_history(history: list[dict[str, Any]], days: int) -> str:
+    prices = [int(point["price_huf"]) for point in history if point.get("price_huf") is not None]
+    if not prices:
+        return "no price history yet"
+    low, high = min(prices), max(prices)
+    if len(prices) == 1:
+        return f"last {days} days: {_format_chart_price(prices[0])} Ft (1 reading)"
+    change = prices[-1] - prices[0]
+    if change < 0:
+        trend = f"down {_format_chart_price(abs(change))} Ft"
+    elif change > 0:
+        trend = f"up {_format_chart_price(change)} Ft"
+    else:
+        trend = "unchanged"
+    return (
+        f"last {days} days: {_format_chart_price(low)}–{_format_chart_price(high)} Ft; "
+        f"{trend} since first reading"
+    )
+
+
 def fmt_price(value: int | None) -> str:
     return "—" if value is None else f"{value:,}".replace(",", " ") + " Ft"
 
@@ -544,11 +722,21 @@ def _offer_link_html(offer: Offer, game_url: str) -> str:
     return f'<a href="{html.escape(url)}">{label}</a>'
 
 
-def build_html_report(results: list[GameResult], state: dict[str, Any], run_at: str) -> str:
+def build_html_report(
+    results: list[GameResult],
+    state: dict[str, Any],
+    run_at: str,
+    *,
+    history_days: int = DEFAULT_PRICE_HISTORY_DAYS,
+    charts: dict[str, bytes] | None = None,
+) -> str:
+    charts = charts or {}
     rows = []
     for result in results:
         prev = state.get(result.url, {})
         delta = compare_with_previous(result, prev)
+        history = price_history_for_report(prev, result, days=history_days)
+        chart_cid = chart_cid_for_url(result.url)
         game_cell = (
             f'<strong>{html.escape(result.name)}</strong>'
             f'<br><a href="{html.escape(result.url)}">compare</a>'
@@ -575,17 +763,30 @@ def build_html_report(results: list[GameResult], state: dict[str, Any], run_at: 
                 f"{html.escape(NO_MATCHING_OFFERS_MSG)}</td>"
                 "</tr>"
             )
-            continue
+        else:
+            for i, offer in enumerate(offers):
+                game_col = game_cell if i == 0 else ""
+                delta_col = html.escape(delta) if i == 0 else ""
+                rows.append(
+                    "<tr>"
+                    f'<td style="padding:6px 8px;border:1px solid #ddd;vertical-align:top;">{game_col}</td>'
+                    f'<td style="padding:6px 8px;border:1px solid #ddd;">{html.escape(fmt_price(offer.price_huf))}</td>'
+                    f'<td style="padding:6px 8px;border:1px solid #ddd;">{_offer_link_html(offer, result.url)}</td>'
+                    f'<td style="padding:6px 8px;border:1px solid #ddd;color:#666;font-size:12px;">{delta_col}</td>'
+                    "</tr>"
+                )
 
-        for i, offer in enumerate(offers):
-            game_col = game_cell if i == 0 else ""
-            delta_col = html.escape(delta) if i == 0 else ""
+        if chart_cid in charts:
+            history_note = html.escape(summarize_price_history(history, history_days))
             rows.append(
                 "<tr>"
-                f'<td style="padding:6px 8px;border:1px solid #ddd;vertical-align:top;">{game_col}</td>'
-                f'<td style="padding:6px 8px;border:1px solid #ddd;">{html.escape(fmt_price(offer.price_huf))}</td>'
-                f'<td style="padding:6px 8px;border:1px solid #ddd;">{_offer_link_html(offer, result.url)}</td>'
-                f'<td style="padding:6px 8px;border:1px solid #ddd;color:#666;font-size:12px;">{delta_col}</td>'
+                '<td colspan="4" style="padding:8px 10px;border:1px solid #ddd;background:#fafafa;">'
+                f'<div style="font-size:11px;color:#666;margin-bottom:6px;">'
+                f"Best price — last {history_days} days</div>"
+                f'<img src="cid:{chart_cid}" alt="{html.escape(result.name)} price chart" '
+                'style="display:block;max-width:100%;height:auto;border:0;">'
+                f'<div style="font-size:11px;color:#888;margin-top:6px;">{history_note}</div>'
+                "</td>"
                 "</tr>"
             )
 
@@ -613,11 +814,18 @@ def build_html_report(results: list[GameResult], state: dict[str, Any], run_at: 
 """
 
 
-def build_text_report(results: list[GameResult], state: dict[str, Any], run_at: str) -> str:
+def build_text_report(
+    results: list[GameResult],
+    state: dict[str, Any],
+    run_at: str,
+    *,
+    history_days: int = DEFAULT_PRICE_HISTORY_DAYS,
+) -> str:
     lines = ["Daily board-game price report", f"Run at: {run_at}", ""]
     for result in results:
         prev = state.get(result.url, {})
         delta = compare_with_previous(result, prev)
+        history = price_history_for_report(prev, result, days=history_days)
         lines.append(f"{result.name} — {result.url}")
         if result.error:
             lines.append(f"  Error: {result.error}")
@@ -633,6 +841,8 @@ def build_text_report(results: list[GameResult], state: dict[str, Any], run_at: 
                 shop = offer.shop or "shop"
                 lines.append(f"  {fmt_price(offer.price_huf)} | {shop}: {link}")
         lines.append(f"  Change: {delta}")
+        if history:
+            lines.append(f"  History: {summarize_price_history(history, history_days)}")
         lines.append("")
     return "\n".join(lines)
 
@@ -642,13 +852,27 @@ def send_email(
     subject: str,
     text_body: str,
     html_body: str,
+    *,
+    embedded_images: dict[str, bytes] | None = None,
 ) -> None:
-    msg = EmailMessage()
+    alternative = MIMEMultipart("alternative")
+    alternative.attach(MIMEText(text_body, "plain", "utf-8"))
+    alternative.attach(MIMEText(html_body, "html", "utf-8"))
+
+    if embedded_images:
+        msg: MIMEMultipart = MIMEMultipart("related")
+        msg.attach(alternative)
+        for cid, data in embedded_images.items():
+            image = MIMEImage(data, _subtype="png")
+            image.add_header("Content-ID", f"<{cid}>")
+            image.add_header("Content-Disposition", "inline", filename=f"{cid}.png")
+            msg.attach(image)
+    else:
+        msg = alternative
+
     msg["Subject"] = subject
     msg["From"] = smtp_cfg["from"]
     msg["To"] = ", ".join(smtp_cfg["to"]) if isinstance(smtp_cfg["to"], list) else smtp_cfg["to"]
-    msg.set_content(text_body)
-    msg.add_alternative(html_body, subtype="html")
 
     host = smtp_cfg["host"]
     port = int(smtp_cfg.get("port", 587))
@@ -676,6 +900,7 @@ def main() -> int:
     cfg = load_config(args.config)
     apply_smtp_env_overrides(cfg)
     state_path = Path(cfg.get("state_path", "state.json"))
+    history_days = int(cfg.get("price_history_days", DEFAULT_PRICE_HISTORY_DAYS))
     state = load_state(state_path)
 
     results: list[GameResult] = []
@@ -691,6 +916,13 @@ def main() -> int:
         if result.error:
             continue
         combined = _best_status_combined(result.best_availability, result.best_condition)
+        prev_entry = state.get(result.url, {})
+        price_history = append_price_history_point(
+            seed_price_history(prev_entry),
+            result.best_price_huf,
+            result.fetched_at,
+            days=history_days,
+        )
         new_state[result.url] = {
             "name": result.name,
             "page_title": result.page_title,
@@ -701,11 +933,19 @@ def main() -> int:
             "offer_count": result.offer_count,
             "new_available_count": result.new_available_count,
             "last_seen": result.fetched_at,
+            "price_history": price_history,
         }
 
     run_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    text_body = build_text_report(results, state, run_at)
-    html_body = build_html_report(results, state, run_at)
+    charts = build_price_charts(results, state, days=history_days)
+    text_body = build_text_report(results, state, run_at, history_days=history_days)
+    html_body = build_html_report(
+        results,
+        state,
+        run_at,
+        history_days=history_days,
+        charts=charts,
+    )
 
     if args.dry_run:
         print(text_body)
@@ -713,7 +953,7 @@ def main() -> int:
 
     smtp_cfg = cfg["smtp"]
     subject = cfg.get("subject", f"Daily board-game report — {run_at[:10]}")
-    send_email(smtp_cfg, subject, text_body, html_body)
+    send_email(smtp_cfg, subject, text_body, html_body, embedded_images=charts or None)
     save_state(state_path, new_state)
     return 0
 
