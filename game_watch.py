@@ -25,7 +25,6 @@ Schedule daily with cron / Task Scheduler / systemd timer.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import html
 import io
 import json
@@ -531,83 +530,127 @@ def price_history_for_report(
     return append_price_history_point(history, result.best_price_huf, result.fetched_at, days=days)
 
 
-def chart_cid_for_url(url: str) -> str:
-    digest = hashlib.sha256(url.encode()).hexdigest()[:12]
-    return f"chart-{digest}"
+COMBINED_CHART_CID = "chart-combined"
+
+CHART_SERIES_COLORS = [
+    ("#2563eb", "#1d4ed8"),
+    ("#dc2626", "#b91c1c"),
+    ("#16a34a", "#15803d"),
+    ("#9333ea", "#7e22ce"),
+    ("#ea580c", "#c2410c"),
+    ("#0891b2", "#0e7490"),
+    ("#ca8a04", "#a16207"),
+    ("#db2777", "#be185d"),
+]
 
 
 def _format_chart_price(value: int) -> str:
     return f"{value:,}".replace(",", " ")
 
 
-def render_price_chart_png(
-    points: list[dict[str, Any]],
-    *,
-    title: str = "",
-    width: int = 480,
-    height: int = 140,
-) -> bytes:
-    parsed: list[tuple[int, int]] = []
-    dates: list[str] = []
-    for point in points:
+def _series_points_by_date(
+    history: list[dict[str, Any]],
+) -> dict[str, int]:
+    points: dict[str, int] = {}
+    for point in history:
         price = point.get("price_huf")
         date = point.get("date")
         if price is None or not date:
             continue
-        parsed.append((len(parsed), int(price)))
-        dates.append(str(date))
+        points[str(date)] = int(price)
+    return points
 
-    if not parsed:
-        raise ValueError("price chart requires at least one point")
+
+def render_combined_price_chart_png(
+    series: list[tuple[str, list[dict[str, Any]]]],
+    *,
+    width: int = 640,
+    plot_height: int = 180,
+) -> bytes:
+    if not series:
+        raise ValueError("combined price chart requires at least one series")
+
+    all_dates = sorted(
+        {
+            str(point["date"])
+            for _, history in series
+            for point in history
+            if point.get("date") and point.get("price_huf") is not None
+        }
+    )
+    if not all_dates:
+        raise ValueError("combined price chart requires at least one point")
+
+    all_prices = [
+        int(point["price_huf"])
+        for _, history in series
+        for point in history
+        if point.get("price_huf") is not None
+    ]
+    min_p = min(all_prices)
+    max_p = max(all_prices)
+    if min_p == max_p:
+        pad = max(int(min_p * 0.05), 500)
+        min_p = max(0, min_p - pad)
+        max_p = max_p + pad
+
+    legend_rows = (len(series) + 1) // 2
+    legend_h = 12 + legend_rows * 16
+    height = plot_height + legend_h + 34
 
     img = Image.new("RGB", (width, height), "white")
     draw = ImageDraw.Draw(img)
     font = ImageFont.load_default()
 
-    margin_l, margin_r, margin_t, margin_b = 56, 12, 18, 28
+    margin_l, margin_r, margin_t, margin_b = 56, 12, 14, 22 + legend_h
     plot_w = width - margin_l - margin_r
     plot_h = height - margin_t - margin_b
-
-    prices = [price for _, price in parsed]
-    min_p = min(prices)
-    max_p = max(prices)
-    if min_p == max_p:
-        pad = max(int(min_p * 0.05), 500)
-        min_p = max(0, min_p - pad)
-        max_p = max_p + pad
+    plot_right = margin_l + plot_w
+    plot_bottom = margin_t + plot_h
 
     def y_for_price(price: int) -> float:
         if max_p == min_p:
             return margin_t + plot_h / 2
         return margin_t + plot_h * (1 - (price - min_p) / (max_p - min_p))
 
-    def x_for_idx(idx: int) -> float:
-        if len(parsed) == 1:
+    def x_for_date(date: str) -> float:
+        if len(all_dates) == 1:
             return margin_l + plot_w / 2
-        return margin_l + plot_w * idx / (len(parsed) - 1)
+        idx = all_dates.index(date)
+        return margin_l + plot_w * idx / (len(all_dates) - 1)
 
-    plot_right = margin_l + plot_w
-    plot_bottom = margin_t + plot_h
     draw.rectangle([margin_l, margin_t, plot_right, plot_bottom], outline="#dddddd")
 
-    coords = [(x_for_idx(idx), y_for_price(price)) for idx, price in parsed]
-    if len(coords) >= 2:
-        draw.line(coords, fill="#2563eb", width=2)
-    for x, y in coords:
-        draw.ellipse([x - 3, y - 3, x + 3, y + 3], fill="#2563eb", outline="#1d4ed8")
+    for idx, (_name, history) in enumerate(series):
+        line_color, dot_color = CHART_SERIES_COLORS[idx % len(CHART_SERIES_COLORS)]
+        by_date = _series_points_by_date(history)
+        ordered_dates = [day for day in all_dates if day in by_date]
+        coords = [(x_for_date(day), y_for_price(by_date[day])) for day in ordered_dates]
+        if len(coords) >= 2:
+            draw.line(coords, fill=line_color, width=2)
+        for x, y in coords:
+            draw.ellipse([x - 3, y - 3, x + 3, y + 3], fill=line_color, outline=dot_color)
 
     draw.text((4, margin_t + plot_h - 6), _format_chart_price(min_p), fill="#666666", font=font)
     draw.text((4, margin_t - 6), _format_chart_price(max_p), fill="#666666", font=font)
 
-    if dates:
-        draw.text((margin_l, height - 16), dates[0][5:], fill="#666666", font=font)
-        if len(dates) > 1:
-            mid = dates[len(dates) // 2][5:]
-            draw.text((margin_l + plot_w / 2 - 14, height - 16), mid, fill="#666666", font=font)
-            draw.text((plot_right - 36, height - 16), dates[-1][5:], fill="#666666", font=font)
+    date_y = plot_bottom + 6
+    draw.text((margin_l, date_y), all_dates[0][5:], fill="#666666", font=font)
+    if len(all_dates) > 1:
+        mid = all_dates[len(all_dates) // 2][5:]
+        draw.text((margin_l + plot_w / 2 - 14, date_y), mid, fill="#666666", font=font)
+        draw.text((plot_right - 36, date_y), all_dates[-1][5:], fill="#666666", font=font)
 
-    if title:
-        draw.text((margin_l, 2), title[:48], fill="#333333", font=font)
+    legend_y = plot_bottom + 22
+    col_w = plot_w / 2
+    for idx, (name, _) in enumerate(series):
+        line_color, _ = CHART_SERIES_COLORS[idx % len(CHART_SERIES_COLORS)]
+        col = idx % 2
+        row = idx // 2
+        x = margin_l + col * col_w
+        y = legend_y + row * 16
+        draw.line([x, y + 5, x + 18, y + 5], fill=line_color, width=2)
+        draw.text((x + 24, y), name[:28], fill="#333333", font=font)
 
     buf = io.BytesIO()
     img.save(buf, format="PNG")
@@ -620,16 +663,17 @@ def build_price_charts(
     *,
     days: int,
 ) -> dict[str, bytes]:
-    charts: dict[str, bytes] = {}
+    series: list[tuple[str, list[dict[str, Any]]]] = []
     for result in results:
         if result.error or result.best_price_huf is None:
             continue
         history = price_history_for_report(state.get(result.url, {}), result, days=days)
         if not history:
             continue
-        cid = chart_cid_for_url(result.url)
-        charts[cid] = render_price_chart_png(history, title=result.name)
-    return charts
+        series.append((result.name, history))
+    if not series:
+        return {}
+    return {COMBINED_CHART_CID: render_combined_price_chart_png(series)}
 
 
 def summarize_price_history(history: list[dict[str, Any]], days: int) -> str:
@@ -732,11 +776,19 @@ def build_html_report(
 ) -> str:
     charts = charts or {}
     rows = []
+    chart_section = ""
+    if COMBINED_CHART_CID in charts:
+        chart_section = (
+            '<div style="margin-bottom:1.2em;">'
+            f'<div style="font-size:12px;color:#666;margin-bottom:6px;">'
+            f"Best price trends — last {history_days} days</div>"
+            f'<img src="cid:{COMBINED_CHART_CID}" alt="Combined price trends" '
+            'style="display:block;max-width:100%;height:auto;border:0;">'
+            "</div>"
+        )
     for result in results:
         prev = state.get(result.url, {})
         delta = compare_with_previous(result, prev)
-        history = price_history_for_report(prev, result, days=history_days)
-        chart_cid = chart_cid_for_url(result.url)
         game_cell = (
             f'<strong>{html.escape(result.name)}</strong>'
             f'<br><a href="{html.escape(result.url)}">compare</a>'
@@ -776,26 +828,13 @@ def build_html_report(
                     "</tr>"
                 )
 
-        if chart_cid in charts:
-            history_note = html.escape(summarize_price_history(history, history_days))
-            rows.append(
-                "<tr>"
-                '<td colspan="4" style="padding:8px 10px;border:1px solid #ddd;background:#fafafa;">'
-                f'<div style="font-size:11px;color:#666;margin-bottom:6px;">'
-                f"Best price — last {history_days} days</div>"
-                f'<img src="cid:{chart_cid}" alt="{html.escape(result.name)} price chart" '
-                'style="display:block;max-width:100%;height:auto;border:0;">'
-                f'<div style="font-size:11px;color:#888;margin-top:6px;">{history_note}</div>'
-                "</td>"
-                "</tr>"
-            )
-
     return f"""\
 <!doctype html>
 <html>
   <body style="font-family:Arial,Helvetica,sans-serif;line-height:1.4;color:#222;">
     <h2 style="margin-bottom:0.2em;">Daily board-game price report</h2>
     <div style="color:#666;margin-bottom:1em;">Run at {html.escape(run_at)}</div>
+    {chart_section}
     <table style="border-collapse:collapse;width:100%;font-size:13px;">
       <thead>
         <tr>
