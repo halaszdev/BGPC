@@ -6,9 +6,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 10,
+    "offer_count": 9,
     "new_available_count": 4,
-    "last_seen": "2026-06-28T19:58:14.398994+00:00",
+    "last_seen": "2026-06-28T23:49:34.336808+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -82,13 +82,13 @@
   "https://tarsasjatekok.com/tarsasjatek/a-gyuruk-ura-parbaj-kozepfoldeert-2024": {
     "name": "Gyűrűk Ura: Párbaj Középföldért",
     "page_title": "A gyűrűk ura: Párbaj középföldéért társasjáték",
-    "best_price_huf": 10649,
+    "best_price_huf": 11886,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 15,
-    "new_available_count": 9,
-    "last_seen": "2026-06-28T19:58:16.248532+00:00",
+    "offer_count": 14,
+    "new_available_count": 8,
+    "last_seen": "2026-06-28T23:49:36.146864+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -144,20 +144,20 @@
       },
       {
         "date": "2026-06-28",
-        "price_huf": 10649
+        "price_huf": 11886
       }
     ]
   },
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 23490,
+    "best_price_huf": 25490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 9,
-    "new_available_count": 6,
-    "last_seen": "2026-06-28T19:58:16.873839+00:00",
+    "offer_count": 8,
+    "new_available_count": 5,
+    "last_seen": "2026-06-28T23:49:37.192760+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -213,7 +213,7 @@
       },
       {
         "date": "2026-06-28",
-        "price_huf": 23490
+        "price_huf": 25490
       }
     ]
   }
