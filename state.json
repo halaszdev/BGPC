@@ -6,9 +6,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 8,
-    "new_available_count": 3,
-    "last_seen": "2026-06-29T20:59:10.372071+00:00",
+    "offer_count": 10,
+    "new_available_count": 4,
+    "last_seen": "2026-06-30T08:46:45.561936+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -69,6 +69,10 @@
       {
         "date": "2026-06-29",
         "price_huf": 23115
+      },
+      {
+        "date": "2026-06-30",
+        "price_huf": 23115
       }
     ]
   },
@@ -86,13 +90,13 @@
   "https://tarsasjatekok.com/tarsasjatek/a-gyuruk-ura-parbaj-kozepfoldeert-2024": {
     "name": "Gyűrűk Ura: Párbaj Középföldért",
     "page_title": "A gyűrűk ura: Párbaj középföldéért társasjáték",
-    "best_price_huf": 11886,
+    "best_price_huf": 10649,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 14,
-    "new_available_count": 8,
-    "last_seen": "2026-06-29T20:59:12.455321+00:00",
+    "offer_count": 15,
+    "new_available_count": 9,
+    "last_seen": "2026-06-30T08:46:47.411725+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -153,19 +157,23 @@
       {
         "date": "2026-06-29",
         "price_huf": 11886
+      },
+      {
+        "date": "2026-06-30",
+        "price_huf": 10649
       }
     ]
   },
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 25490,
+    "best_price_huf": 23490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 8,
-    "new_available_count": 5,
-    "last_seen": "2026-06-29T20:59:14.096212+00:00",
+    "offer_count": 9,
+    "new_available_count": 6,
+    "last_seen": "2026-06-30T08:46:48.288622+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -226,6 +234,10 @@
       {
         "date": "2026-06-29",
         "price_huf": 25490
+      },
+      {
+        "date": "2026-06-30",
+        "price_huf": 23490
       }
     ]
   }
