@@ -2,13 +2,13 @@
   "https://tarsasjatekok.com/tarsasjatek/dune-imperium-felkeles-2023": {
     "name": "Dűne: Impérium - Felkelés",
     "page_title": "Dűne: Impérium – Felkelés társasjáték",
-    "best_price_huf": 23115,
+    "best_price_huf": 23990,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 9,
-    "new_available_count": 4,
-    "last_seen": "2026-07-07T22:39:33.751029+00:00",
+    "offer_count": 8,
+    "new_available_count": 3,
+    "last_seen": "2026-07-08T07:42:38.924740+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -101,6 +101,10 @@
       {
         "date": "2026-07-07",
         "price_huf": 23115
+      },
+      {
+        "date": "2026-07-08",
+        "price_huf": 23990
       }
     ]
   },
@@ -122,9 +126,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 15,
-    "new_available_count": 9,
-    "last_seen": "2026-07-07T22:39:35.815334+00:00",
+    "offer_count": 14,
+    "new_available_count": 8,
+    "last_seen": "2026-07-08T07:42:40.129726+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -217,6 +221,10 @@
       {
         "date": "2026-07-07",
         "price_huf": 10649
+      },
+      {
+        "date": "2026-07-08",
+        "price_huf": 10649
       }
     ]
   },
@@ -229,7 +237,7 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 6,
-    "last_seen": "2026-07-07T22:39:37.352895+00:00",
+    "last_seen": "2026-07-08T07:42:41.034906+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -321,6 +329,10 @@
       },
       {
         "date": "2026-07-07",
+        "price_huf": 23490
+      },
+      {
+        "date": "2026-07-08",
         "price_huf": 23490
       }
     ]
