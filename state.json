@@ -6,9 +6,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 8,
+    "offer_count": 9,
     "new_available_count": 3,
-    "last_seen": "2026-07-10T23:11:24.359787+00:00",
+    "last_seen": "2026-07-11T00:12:59.003063+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -113,6 +113,10 @@
       {
         "date": "2026-07-10",
         "price_huf": 23990
+      },
+      {
+        "date": "2026-07-11",
+        "price_huf": 23990
       }
     ]
   },
@@ -130,13 +134,13 @@
   "https://tarsasjatekok.com/tarsasjatek/a-gyuruk-ura-parbaj-kozepfoldeert-2024": {
     "name": "Gyűrűk Ura: Párbaj Középföldért",
     "page_title": "A gyűrűk ura: Párbaj középföldéért társasjáték",
-    "best_price_huf": 11886,
+    "best_price_huf": 10649,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 14,
-    "new_available_count": 8,
-    "last_seen": "2026-07-10T23:11:26.919415+00:00",
+    "offer_count": 15,
+    "new_available_count": 9,
+    "last_seen": "2026-07-11T00:13:02.166516+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -241,6 +245,10 @@
       {
         "date": "2026-07-10",
         "price_huf": 11886
+      },
+      {
+        "date": "2026-07-11",
+        "price_huf": 10649
       }
     ]
   },
@@ -253,7 +261,7 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 5,
-    "last_seen": "2026-07-10T23:11:28.483895+00:00",
+    "last_seen": "2026-07-11T00:13:03.284901+00:00",
     "price_history": [
       {
         "date": "2026-06-15",
@@ -357,6 +365,10 @@
       },
       {
         "date": "2026-07-10",
+        "price_huf": 23490
+      },
+      {
+        "date": "2026-07-11",
         "price_huf": 23490
       }
     ]
