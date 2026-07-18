@@ -7,13 +7,9 @@
     "best_condition": "új",
     "best_status": "raktáron új",
     "offer_count": 10,
-    "new_available_count": 4,
-    "last_seen": "2026-07-17T23:52:44.120451+00:00",
+    "new_available_count": 5,
+    "last_seen": "2026-07-18T02:30:20.770238+00:00",
     "price_history": [
-      {
-        "date": "2026-06-18",
-        "price_huf": 23115
-      },
       {
         "date": "2026-06-19",
         "price_huf": 23115
@@ -129,6 +125,10 @@
       {
         "date": "2026-07-17",
         "price_huf": 23115
+      },
+      {
+        "date": "2026-07-18",
+        "price_huf": 23115
       }
     ]
   },
@@ -152,12 +152,8 @@
     "best_status": "raktáron új",
     "offer_count": 14,
     "new_available_count": 9,
-    "last_seen": "2026-07-17T23:52:46.176603+00:00",
+    "last_seen": "2026-07-18T02:30:21.867648+00:00",
     "price_history": [
-      {
-        "date": "2026-06-18",
-        "price_huf": 10649
-      },
       {
         "date": "2026-06-19",
         "price_huf": 10649
@@ -273,6 +269,10 @@
       {
         "date": "2026-07-17",
         "price_huf": 10649
+      },
+      {
+        "date": "2026-07-18",
+        "price_huf": 10649
       }
     ]
   },
@@ -285,12 +285,8 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 6,
-    "last_seen": "2026-07-17T23:52:47.623592+00:00",
+    "last_seen": "2026-07-18T02:30:23.487927+00:00",
     "price_history": [
-      {
-        "date": "2026-06-18",
-        "price_huf": 23490
-      },
       {
         "date": "2026-06-19",
         "price_huf": 23490
@@ -405,6 +401,10 @@
       },
       {
         "date": "2026-07-17",
+        "price_huf": 23490
+      },
+      {
+        "date": "2026-07-18",
         "price_huf": 23490
       }
     ]
