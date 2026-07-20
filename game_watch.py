@@ -8,7 +8,8 @@ What it does:
 - Extracts visible text, tries to identify offers, prices, and availability cues.
 - Keeps a small JSON state file so the email can mention changes since the last run.
 - Records a rolling best-price history and embeds a chart in the HTML email.
-- Sends a report-style email via SMTP.
+- Sends a report-style email via SMTP when at least one tracked price changed or no
+  email was sent in the last 7 days.
 
 Install:
     uv sync
@@ -53,6 +54,8 @@ logger = logging.getLogger(__name__)
 UA = "Mozilla/5.0 (compatible; GameWatch/1.0; +https://example.com)"
 DEFAULT_TIMEOUT = 25
 DEFAULT_PRICE_HISTORY_DAYS = 30
+DEFAULT_EMAIL_HEARTBEAT_DAYS = 7
+STATE_META_KEY = "_meta"
 
 
 # Grouped thousands (e.g. "12 345"); avoids loose digit runs like \d[\d\s]{2,}.
@@ -727,6 +730,63 @@ def format_matching_offers_summary(total_in_sections: int, matching: list[Offer]
     )
 
 
+def _parse_iso_datetime(value: str) -> datetime | None:
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        return None
+
+
+def last_email_sent_at(state: dict[str, Any]) -> datetime | None:
+    meta = state.get(STATE_META_KEY)
+    if not isinstance(meta, dict):
+        return None
+    last_sent = meta.get("last_email_sent")
+    if not isinstance(last_sent, str):
+        return None
+    parsed = _parse_iso_datetime(last_sent)
+    if parsed is None:
+        return None
+    if parsed.tzinfo is None:
+        return parsed.replace(tzinfo=UTC)
+    return parsed.astimezone(UTC)
+
+
+def record_email_sent(state: dict[str, Any], when: datetime | None = None) -> None:
+    sent_at = when or datetime.now(UTC)
+    meta = dict(state.get(STATE_META_KEY) or {})
+    meta["last_email_sent"] = sent_at.isoformat()
+    state[STATE_META_KEY] = meta
+
+
+def has_price_change(results: list[GameResult], state: dict[str, Any]) -> bool:
+    for result in results:
+        if result.error:
+            continue
+        prev = state.get(result.url, {})
+        if not isinstance(prev, dict):
+            continue
+        prev_price = prev.get("best_price_huf")
+        cur_price = result.best_price_huf
+        if prev_price != cur_price:
+            return True
+    return False
+
+
+def should_send_email(
+    results: list[GameResult],
+    state: dict[str, Any],
+    *,
+    heartbeat_days: int = DEFAULT_EMAIL_HEARTBEAT_DAYS,
+) -> bool:
+    if has_price_change(results, state):
+        return True
+    last_sent = last_email_sent_at(state)
+    if last_sent is None:
+        return True
+    return datetime.now(UTC) - last_sent >= timedelta(days=heartbeat_days)
+
+
 def compare_with_previous(current: GameResult, prev: dict[str, Any]) -> str:
     if current.error:
         return "fetch failed; no comparison"
@@ -986,13 +1046,30 @@ def main() -> int:
         charts=charts,
     )
 
+    heartbeat_days = int(cfg.get("email_heartbeat_days", DEFAULT_EMAIL_HEARTBEAT_DAYS))
+    send_report = should_send_email(results, state, heartbeat_days=heartbeat_days)
+
     if args.dry_run:
         print(text_body)
+        if not send_report:
+            print(
+                "\n(Email would be skipped: no price change and an email was sent "
+                f"within the last {heartbeat_days} days.)"
+            )
         return 0
 
-    smtp_cfg = cfg["smtp"]
-    subject = cfg.get("subject", f"Daily board-game report — {run_at[:10]}")
-    send_email(smtp_cfg, subject, text_body, html_body, embedded_images=charts or None)
+    if send_report:
+        smtp_cfg = cfg["smtp"]
+        subject = cfg.get("subject", f"Daily board-game report — {run_at[:10]}")
+        send_email(smtp_cfg, subject, text_body, html_body, embedded_images=charts or None)
+        record_email_sent(new_state)
+        logger.info("Email sent.")
+    else:
+        logger.info(
+            "Skipping email: no price change and an email was sent within the last %s days.",
+            heartbeat_days,
+        )
+
     save_state(state_path, new_state)
     return 0
 
