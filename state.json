@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 6,
-    "last_seen": "2026-07-21T20:53:16.228992+00:00",
+    "last_seen": "2026-07-21T23:09:11.022514+00:00",
     "price_history": [
       {
         "date": "2026-06-22",
@@ -152,7 +152,7 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 8,
-    "last_seen": "2026-07-21T20:53:17.236351+00:00",
+    "last_seen": "2026-07-21T23:09:12.596021+00:00",
     "price_history": [
       {
         "date": "2026-06-22",
@@ -279,13 +279,13 @@
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 23490,
+    "best_price_huf": 25490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 9,
-    "new_available_count": 6,
-    "last_seen": "2026-07-21T20:53:19.105033+00:00",
+    "offer_count": 8,
+    "new_available_count": 5,
+    "last_seen": "2026-07-21T23:09:14.344487+00:00",
     "price_history": [
       {
         "date": "2026-06-22",
@@ -405,11 +405,11 @@
       },
       {
         "date": "2026-07-21",
-        "price_huf": 23490
+        "price_huf": 25490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-07-20T07:24:12.910614+00:00"
+    "last_email_sent": "2026-07-21T23:09:16.083687+00:00"
   }
 }
