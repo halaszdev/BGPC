@@ -6,7 +6,7 @@ games:
   - name: "Világrend"
     url: "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024"
   - name: "Tudattalan mélyén" 
-    url:"https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022"
+    url: "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022"
  
 smtp:
   host: smtp.gmail.com
