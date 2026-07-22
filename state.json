@@ -2,18 +2,14 @@
   "https://tarsasjatekok.com/tarsasjatek/dune-imperium-felkeles-2023": {
     "name": "Dűne: Impérium - Felkelés",
     "page_title": "Dűne: Impérium – Felkelés társasjáték",
-    "best_price_huf": 23115,
+    "best_price_huf": 21990,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
     "offer_count": 10,
-    "new_available_count": 6,
-    "last_seen": "2026-07-21T23:09:11.022514+00:00",
+    "new_available_count": 7,
+    "last_seen": "2026-07-22T00:05:57.668601+00:00",
     "price_history": [
-      {
-        "date": "2026-06-22",
-        "price_huf": 23115
-      },
       {
         "date": "2026-06-23",
         "price_huf": 23115
@@ -129,6 +125,10 @@
       {
         "date": "2026-07-21",
         "price_huf": 23115
+      },
+      {
+        "date": "2026-07-22",
+        "price_huf": 21990
       }
     ]
   },
@@ -150,14 +150,10 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 13,
-    "new_available_count": 8,
-    "last_seen": "2026-07-21T23:09:12.596021+00:00",
+    "offer_count": 14,
+    "new_available_count": 9,
+    "last_seen": "2026-07-22T00:05:59.394148+00:00",
     "price_history": [
-      {
-        "date": "2026-06-22",
-        "price_huf": 8126
-      },
       {
         "date": "2026-06-23",
         "price_huf": 8126
@@ -272,6 +268,10 @@
       },
       {
         "date": "2026-07-21",
+        "price_huf": 10649
+      },
+      {
+        "date": "2026-07-22",
         "price_huf": 10649
       }
     ]
@@ -285,12 +285,8 @@
     "best_status": "raktáron új",
     "offer_count": 8,
     "new_available_count": 5,
-    "last_seen": "2026-07-21T23:09:14.344487+00:00",
+    "last_seen": "2026-07-22T00:06:00.701484+00:00",
     "price_history": [
-      {
-        "date": "2026-06-22",
-        "price_huf": 23490
-      },
       {
         "date": "2026-06-23",
         "price_huf": 23490
@@ -406,10 +402,14 @@
       {
         "date": "2026-07-21",
         "price_huf": 25490
+      },
+      {
+        "date": "2026-07-22",
+        "price_huf": 25490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-07-21T23:09:16.083687+00:00"
+    "last_email_sent": "2026-07-22T00:06:02.498690+00:00"
   }
 }
