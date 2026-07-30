@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 6,
-    "last_seen": "2026-07-30T21:12:40.966163+00:00",
+    "last_seen": "2026-07-30T22:29:36.825096+00:00",
     "price_history": [
       {
         "date": "2026-07-01",
@@ -152,7 +152,7 @@
     "best_status": "raktáron új",
     "offer_count": 14,
     "new_available_count": 9,
-    "last_seen": "2026-07-30T21:12:41.772084+00:00",
+    "last_seen": "2026-07-30T22:29:39.238599+00:00",
     "price_history": [
       {
         "date": "2026-07-01",
@@ -279,13 +279,13 @@
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 25490,
+    "best_price_huf": 23490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
     "offer_count": 9,
-    "new_available_count": 5,
-    "last_seen": "2026-07-30T21:12:42.465235+00:00",
+    "new_available_count": 6,
+    "last_seen": "2026-07-30T22:29:40.163886+00:00",
     "price_history": [
       {
         "date": "2026-07-01",
@@ -405,12 +405,12 @@
       },
       {
         "date": "2026-07-30",
-        "price_huf": 25490
+        "price_huf": 23490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-07-28T22:45:26.950352+00:00"
+    "last_email_sent": "2026-07-30T22:29:43.919890+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
@@ -421,7 +421,7 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 4,
-    "last_seen": "2026-07-30T21:12:43.248634+00:00",
+    "last_seen": "2026-07-30T22:29:41.894275+00:00",
     "price_history": [
       {
         "date": "2026-07-22",
