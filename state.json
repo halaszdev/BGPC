@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 6,
-    "last_seen": "2026-07-31T22:14:32.155652+00:00",
+    "last_seen": "2026-07-31T23:18:56.415206+00:00",
     "price_history": [
       {
         "date": "2026-07-02",
@@ -146,13 +146,13 @@
   "https://tarsasjatekok.com/tarsasjatek/a-gyuruk-ura-parbaj-kozepfoldeert-2024": {
     "name": "Gyűrűk Ura: Párbaj Középföldért",
     "page_title": "A gyűrűk ura: Párbaj középföldéért társasjáték",
-    "best_price_huf": 10649,
+    "best_price_huf": 11886,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 8,
-    "last_seen": "2026-07-31T22:14:34.317128+00:00",
+    "last_seen": "2026-07-31T23:18:58.623682+00:00",
     "price_history": [
       {
         "date": "2026-07-02",
@@ -272,7 +272,7 @@
       },
       {
         "date": "2026-07-31",
-        "price_huf": 10649
+        "price_huf": 11886
       }
     ]
   },
@@ -285,7 +285,7 @@
     "best_status": "raktáron új",
     "offer_count": 8,
     "new_available_count": 5,
-    "last_seen": "2026-07-31T22:14:35.575927+00:00",
+    "last_seen": "2026-07-31T23:18:59.843409+00:00",
     "price_history": [
       {
         "date": "2026-07-02",
@@ -410,18 +410,18 @@
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-07-31T22:14:38.496307+00:00"
+    "last_email_sent": "2026-07-31T23:19:02.365356+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
     "page_title": "A tudattalan mélyén társasjáték",
-    "best_price_huf": 22990,
+    "best_price_huf": 25793,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 10,
-    "new_available_count": 4,
-    "last_seen": "2026-07-31T22:14:37.296947+00:00",
+    "offer_count": 9,
+    "new_available_count": 3,
+    "last_seen": "2026-07-31T23:19:01.392197+00:00",
     "price_history": [
       {
         "date": "2026-07-22",
@@ -461,7 +461,7 @@
       },
       {
         "date": "2026-07-31",
-        "price_huf": 22990
+        "price_huf": 25793
       }
     ]
   }
