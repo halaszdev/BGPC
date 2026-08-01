@@ -6,9 +6,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 7,
-    "new_available_count": 4,
-    "last_seen": "2026-08-01T21:56:09.518814+00:00",
+    "offer_count": 8,
+    "new_available_count": 5,
+    "last_seen": "2026-08-01T22:56:50.884892+00:00",
     "price_history": [
       {
         "date": "2026-07-03",
@@ -150,9 +150,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 11,
-    "new_available_count": 6,
-    "last_seen": "2026-08-01T21:56:11.716644+00:00",
+    "offer_count": 12,
+    "new_available_count": 7,
+    "last_seen": "2026-08-01T22:56:52.779194+00:00",
     "price_history": [
       {
         "date": "2026-07-03",
@@ -279,13 +279,13 @@
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 25490,
+    "best_price_huf": 23490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 7,
-    "new_available_count": 5,
-    "last_seen": "2026-08-01T21:56:13.444998+00:00",
+    "offer_count": 8,
+    "new_available_count": 6,
+    "last_seen": "2026-08-01T22:56:53.898030+00:00",
     "price_history": [
       {
         "date": "2026-07-03",
@@ -405,12 +405,12 @@
       },
       {
         "date": "2026-08-01",
-        "price_huf": 25490
+        "price_huf": 23490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-08-01T00:15:06.018209+00:00"
+    "last_email_sent": "2026-08-01T22:56:56.614998+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
@@ -421,7 +421,7 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 3,
-    "last_seen": "2026-08-01T21:56:15.097856+00:00",
+    "last_seen": "2026-08-01T22:56:55.387343+00:00",
     "price_history": [
       {
         "date": "2026-07-22",
