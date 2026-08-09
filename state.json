@@ -8,12 +8,8 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 7,
-    "last_seen": "2026-08-08T23:41:12.993216+00:00",
+    "last_seen": "2026-08-09T00:35:27.501896+00:00",
     "price_history": [
-      {
-        "date": "2026-07-10",
-        "price_huf": 23990
-      },
       {
         "date": "2026-07-11",
         "price_huf": 23990
@@ -128,6 +124,10 @@
       },
       {
         "date": "2026-08-08",
+        "price_huf": 21990
+      },
+      {
+        "date": "2026-08-09",
         "price_huf": 21990
       }
     ]
@@ -152,12 +152,8 @@
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 8,
-    "last_seen": "2026-08-08T23:41:15.016275+00:00",
+    "last_seen": "2026-08-09T00:35:29.232546+00:00",
     "price_history": [
-      {
-        "date": "2026-07-10",
-        "price_huf": 11886
-      },
       {
         "date": "2026-07-11",
         "price_huf": 10649
@@ -272,6 +268,10 @@
       },
       {
         "date": "2026-08-08",
+        "price_huf": 10649
+      },
+      {
+        "date": "2026-08-09",
         "price_huf": 10649
       }
     ]
@@ -285,12 +285,8 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 7,
-    "last_seen": "2026-08-08T23:41:16.500975+00:00",
+    "last_seen": "2026-08-09T00:35:30.478877+00:00",
     "price_history": [
-      {
-        "date": "2026-07-10",
-        "price_huf": 23490
-      },
       {
         "date": "2026-07-11",
         "price_huf": 23490
@@ -405,6 +401,10 @@
       },
       {
         "date": "2026-08-08",
+        "price_huf": 23490
+      },
+      {
+        "date": "2026-08-09",
         "price_huf": 23490
       }
     ]
@@ -421,7 +421,7 @@
     "best_status": "raktáron új",
     "offer_count": 11,
     "new_available_count": 4,
-    "last_seen": "2026-08-08T23:41:18.200571+00:00",
+    "last_seen": "2026-08-09T00:35:31.632378+00:00",
     "price_history": [
       {
         "date": "2026-07-22",
@@ -493,6 +493,10 @@
       },
       {
         "date": "2026-08-08",
+        "price_huf": 22990
+      },
+      {
+        "date": "2026-08-09",
         "price_huf": 22990
       }
     ]
