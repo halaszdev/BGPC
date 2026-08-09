@@ -7,6 +7,8 @@ games:
     url: "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024"
   - name: "Tudattalan mélyén" 
     url: "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022"
+  - name: Homályrév 
+    url: https://tarsasjatekok.com/tarsasjatek/homalyrev-az-oroszlanfalka-2020
  
 smtp:
   host: smtp.gmail.com
