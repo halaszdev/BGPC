@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 7,
-    "last_seen": "2026-08-09T22:01:20.498355+00:00",
+    "last_seen": "2026-08-09T22:46:02.112315+00:00",
     "price_history": [
       {
         "date": "2026-07-11",
@@ -152,7 +152,7 @@
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 8,
-    "last_seen": "2026-08-09T22:01:21.388019+00:00",
+    "last_seen": "2026-08-09T22:46:03.961048+00:00",
     "price_history": [
       {
         "date": "2026-07-11",
@@ -279,13 +279,13 @@
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 23490,
+    "best_price_huf": 25490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 10,
-    "new_available_count": 7,
-    "last_seen": "2026-08-09T22:01:22.321726+00:00",
+    "offer_count": 9,
+    "new_available_count": 6,
+    "last_seen": "2026-08-09T22:46:05.130297+00:00",
     "price_history": [
       {
         "date": "2026-07-11",
@@ -405,12 +405,12 @@
       },
       {
         "date": "2026-08-09",
-        "price_huf": 23490
+        "price_huf": 25490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-08-09T09:56:35.769977+00:00"
+    "last_email_sent": "2026-08-09T22:46:09.671033+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
@@ -421,7 +421,7 @@
     "best_status": "raktáron új",
     "offer_count": 11,
     "new_available_count": 4,
-    "last_seen": "2026-08-09T22:01:23.235014+00:00",
+    "last_seen": "2026-08-09T22:46:06.659071+00:00",
     "price_history": [
       {
         "date": "2026-07-22",
@@ -508,9 +508,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 9,
-    "new_available_count": 2,
-    "last_seen": "2026-08-09T22:01:24.218217+00:00",
+    "offer_count": 12,
+    "new_available_count": 3,
+    "last_seen": "2026-08-09T22:46:08.427399+00:00",
     "price_history": [
       {
         "date": "2026-08-09",
