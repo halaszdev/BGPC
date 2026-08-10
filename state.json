@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 7,
-    "last_seen": "2026-08-10T21:55:46.278145+00:00",
+    "last_seen": "2026-08-10T22:38:19.777654+00:00",
     "price_history": [
       {
         "date": "2026-07-12",
@@ -150,9 +150,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 12,
-    "new_available_count": 8,
-    "last_seen": "2026-08-10T21:55:47.167514+00:00",
+    "offer_count": 13,
+    "new_available_count": 9,
+    "last_seen": "2026-08-10T22:38:21.548007+00:00",
     "price_history": [
       {
         "date": "2026-07-12",
@@ -279,13 +279,13 @@
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 25490,
+    "best_price_huf": 23490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 9,
-    "new_available_count": 6,
-    "last_seen": "2026-08-10T21:55:48.055369+00:00",
+    "offer_count": 10,
+    "new_available_count": 7,
+    "last_seen": "2026-08-10T22:38:22.971721+00:00",
     "price_history": [
       {
         "date": "2026-07-12",
@@ -405,12 +405,12 @@
       },
       {
         "date": "2026-08-10",
-        "price_huf": 25490
+        "price_huf": 23490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-08-09T22:46:09.671033+00:00"
+    "last_email_sent": "2026-08-10T22:38:28.845515+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
@@ -419,9 +419,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 11,
-    "new_available_count": 4,
-    "last_seen": "2026-08-10T21:55:48.992063+00:00",
+    "offer_count": 12,
+    "new_available_count": 5,
+    "last_seen": "2026-08-10T22:38:24.494888+00:00",
     "price_history": [
       {
         "date": "2026-07-22",
@@ -514,7 +514,7 @@
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 3,
-    "last_seen": "2026-08-10T21:55:49.941558+00:00",
+    "last_seen": "2026-08-10T22:38:27.112015+00:00",
     "price_history": [
       {
         "date": "2026-08-09",
