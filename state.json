@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 6,
-    "last_seen": "2026-09-01T18:48:25.800745+00:00",
+    "last_seen": "2026-09-01T21:26:10.552760+00:00",
     "price_history": [
       {
         "date": "2026-08-03",
@@ -146,13 +146,13 @@
   "https://tarsasjatekok.com/tarsasjatek/a-gyuruk-ura-parbaj-kozepfoldeert-2024": {
     "name": "Gyűrűk Ura: Párbaj Középföldért",
     "page_title": "A gyűrűk ura: Párbaj középföldéért társasjáték",
-    "best_price_huf": 11886,
+    "best_price_huf": 10649,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 12,
-    "new_available_count": 8,
-    "last_seen": "2026-09-01T18:48:26.538374+00:00",
+    "offer_count": 13,
+    "new_available_count": 9,
+    "last_seen": "2026-09-01T21:26:12.911433+00:00",
     "price_history": [
       {
         "date": "2026-08-03",
@@ -272,7 +272,7 @@
       },
       {
         "date": "2026-09-01",
-        "price_huf": 11886
+        "price_huf": 10649
       }
     ]
   },
@@ -285,7 +285,7 @@
     "best_status": "raktáron új",
     "offer_count": 11,
     "new_available_count": 8,
-    "last_seen": "2026-09-01T18:48:28.351814+00:00",
+    "last_seen": "2026-09-01T21:26:14.874099+00:00",
     "price_history": [
       {
         "date": "2026-08-03",
@@ -410,18 +410,18 @@
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-09-01T18:48:31.236372+00:00"
+    "last_email_sent": "2026-09-01T21:26:21.155757+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
     "page_title": "A tudattalan mélyén társasjáték",
-    "best_price_huf": 24390,
+    "best_price_huf": 22990,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 12,
-    "new_available_count": 5,
-    "last_seen": "2026-09-01T18:48:29.164601+00:00",
+    "offer_count": 13,
+    "new_available_count": 6,
+    "last_seen": "2026-09-01T21:26:16.807022+00:00",
     "price_history": [
       {
         "date": "2026-08-03",
@@ -541,7 +541,7 @@
       },
       {
         "date": "2026-09-01",
-        "price_huf": 24390
+        "price_huf": 22990
       }
     ]
   },
@@ -554,7 +554,7 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 3,
-    "last_seen": "2026-09-01T18:48:30.082662+00:00",
+    "last_seen": "2026-09-01T21:26:19.266055+00:00",
     "price_history": [
       {
         "date": "2026-08-09",
