@@ -6,14 +6,10 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 10,
+    "offer_count": 9,
     "new_available_count": 6,
-    "last_seen": "2026-09-02T23:21:46.791008+00:00",
+    "last_seen": "2026-09-03T01:17:58.000083+00:00",
     "price_history": [
-      {
-        "date": "2026-08-04",
-        "price_huf": 21990
-      },
       {
         "date": "2026-08-05",
         "price_huf": 21990
@@ -128,6 +124,10 @@
       },
       {
         "date": "2026-09-02",
+        "price_huf": 21990
+      },
+      {
+        "date": "2026-09-03",
         "price_huf": 21990
       }
     ]
@@ -146,18 +146,14 @@
   "https://tarsasjatekok.com/tarsasjatek/a-gyuruk-ura-parbaj-kozepfoldeert-2024": {
     "name": "Gyűrűk Ura: Párbaj Középföldért",
     "page_title": "A gyűrűk ura: Párbaj középföldéért társasjáték",
-    "best_price_huf": 11886,
+    "best_price_huf": 10649,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 12,
+    "offer_count": 11,
     "new_available_count": 8,
-    "last_seen": "2026-09-02T23:21:49.392610+00:00",
+    "last_seen": "2026-09-03T01:18:00.165809+00:00",
     "price_history": [
-      {
-        "date": "2026-08-04",
-        "price_huf": 10649
-      },
       {
         "date": "2026-08-05",
         "price_huf": 10649
@@ -273,6 +269,10 @@
       {
         "date": "2026-09-02",
         "price_huf": 11886
+      },
+      {
+        "date": "2026-09-03",
+        "price_huf": 10649
       }
     ]
   },
@@ -285,12 +285,8 @@
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 8,
-    "last_seen": "2026-09-02T23:21:51.530467+00:00",
+    "last_seen": "2026-09-03T01:18:02.345581+00:00",
     "price_history": [
-      {
-        "date": "2026-08-04",
-        "price_huf": 25490
-      },
       {
         "date": "2026-08-05",
         "price_huf": 25490
@@ -406,27 +402,27 @@
       {
         "date": "2026-09-02",
         "price_huf": 23490
+      },
+      {
+        "date": "2026-09-03",
+        "price_huf": 23490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-09-02T23:21:58.175846+00:00"
+    "last_email_sent": "2026-09-03T01:18:08.299755+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
     "page_title": "A tudattalan mélyén társasjáték",
-    "best_price_huf": 24490,
+    "best_price_huf": 22990,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 5,
-    "last_seen": "2026-09-02T23:21:53.639619+00:00",
+    "last_seen": "2026-09-03T01:18:04.293898+00:00",
     "price_history": [
-      {
-        "date": "2026-08-04",
-        "price_huf": 25793
-      },
       {
         "date": "2026-08-05",
         "price_huf": 22990
@@ -542,6 +538,10 @@
       {
         "date": "2026-09-02",
         "price_huf": 24490
+      },
+      {
+        "date": "2026-09-03",
+        "price_huf": 22990
       }
     ]
   },
@@ -554,7 +554,7 @@
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 3,
-    "last_seen": "2026-09-02T23:21:56.584411+00:00",
+    "last_seen": "2026-09-03T01:18:07.154117+00:00",
     "price_history": [
       {
         "date": "2026-08-09",
@@ -654,6 +654,10 @@
       },
       {
         "date": "2026-09-02",
+        "price_huf": 23990
+      },
+      {
+        "date": "2026-09-03",
         "price_huf": 23990
       }
     ]
