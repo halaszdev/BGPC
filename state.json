@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 7,
-    "last_seen": "2026-09-21T18:45:55.303410+00:00",
+    "last_seen": "2026-09-21T22:18:58.168936+00:00",
     "price_history": [
       {
         "date": "2026-08-23",
@@ -152,7 +152,7 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 9,
-    "last_seen": "2026-09-21T18:45:56.156322+00:00",
+    "last_seen": "2026-09-21T22:19:00.965408+00:00",
     "price_history": [
       {
         "date": "2026-08-23",
@@ -279,13 +279,13 @@
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 25490,
+    "best_price_huf": 23490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 11,
-    "new_available_count": 7,
-    "last_seen": "2026-09-21T18:45:58.018973+00:00",
+    "offer_count": 12,
+    "new_available_count": 8,
+    "last_seen": "2026-09-21T22:19:03.081648+00:00",
     "price_history": [
       {
         "date": "2026-08-23",
@@ -405,12 +405,12 @@
       },
       {
         "date": "2026-09-21",
-        "price_huf": 25490
+        "price_huf": 23490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-09-20T23:17:30.628187+00:00"
+    "last_email_sent": "2026-09-21T22:19:09.561390+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
@@ -421,7 +421,7 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 7,
-    "last_seen": "2026-09-21T18:45:59.756964+00:00",
+    "last_seen": "2026-09-21T22:19:05.426289+00:00",
     "price_history": [
       {
         "date": "2026-08-23",
@@ -554,7 +554,7 @@
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 3,
-    "last_seen": "2026-09-21T18:46:00.676214+00:00",
+    "last_seen": "2026-09-21T22:19:07.447757+00:00",
     "price_history": [
       {
         "date": "2026-08-23",
