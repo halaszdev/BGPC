@@ -2,18 +2,14 @@
   "https://tarsasjatekok.com/tarsasjatek/dune-imperium-felkeles-2023": {
     "name": "Dűne: Impérium - Felkelés",
     "page_title": "Dűne: Impérium – Felkelés társasjáték",
-    "best_price_huf": 21990,
+    "best_price_huf": 23115,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 9,
-    "new_available_count": 7,
-    "last_seen": "2026-10-11T22:31:51.312692+00:00",
+    "offer_count": 8,
+    "new_available_count": 6,
+    "last_seen": "2026-10-12T01:44:49.964631+00:00",
     "price_history": [
-      {
-        "date": "2026-09-12",
-        "price_huf": 21990
-      },
       {
         "date": "2026-09-13",
         "price_huf": 21990
@@ -129,6 +125,10 @@
       {
         "date": "2026-10-11",
         "price_huf": 21990
+      },
+      {
+        "date": "2026-10-12",
+        "price_huf": 23115
       }
     ]
   },
@@ -146,18 +146,14 @@
   "https://tarsasjatekok.com/tarsasjatek/a-gyuruk-ura-parbaj-kozepfoldeert-2024": {
     "name": "Gyűrűk Ura: Párbaj Középföldért",
     "page_title": "A gyűrűk ura: Párbaj középföldéért társasjáték",
-    "best_price_huf": 10649,
+    "best_price_huf": 11886,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 13,
-    "new_available_count": 7,
-    "last_seen": "2026-10-11T22:32:00.128262+00:00",
+    "offer_count": 12,
+    "new_available_count": 6,
+    "last_seen": "2026-10-12T01:44:52.632180+00:00",
     "price_history": [
-      {
-        "date": "2026-09-12",
-        "price_huf": 10649
-      },
       {
         "date": "2026-09-13",
         "price_huf": 10649
@@ -273,6 +269,10 @@
       {
         "date": "2026-10-11",
         "price_huf": 10649
+      },
+      {
+        "date": "2026-10-12",
+        "price_huf": 11886
       }
     ]
   },
@@ -283,14 +283,10 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 13,
+    "offer_count": 12,
     "new_available_count": 8,
-    "last_seen": "2026-10-11T22:32:00.978785+00:00",
+    "last_seen": "2026-10-12T01:44:54.585919+00:00",
     "price_history": [
-      {
-        "date": "2026-09-12",
-        "price_huf": 23490
-      },
       {
         "date": "2026-09-13",
         "price_huf": 23490
@@ -405,28 +401,28 @@
       },
       {
         "date": "2026-10-11",
+        "price_huf": 25490
+      },
+      {
+        "date": "2026-10-12",
         "price_huf": 25490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-10-11T22:32:06.083111+00:00"
+    "last_email_sent": "2026-10-12T01:45:01.265375+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
     "page_title": "A tudattalan mélyén társasjáték",
-    "best_price_huf": 22990,
+    "best_price_huf": 25793,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 12,
-    "new_available_count": 5,
-    "last_seen": "2026-10-11T22:32:02.570593+00:00",
+    "offer_count": 11,
+    "new_available_count": 4,
+    "last_seen": "2026-10-12T01:44:56.573221+00:00",
     "price_history": [
-      {
-        "date": "2026-09-12",
-        "price_huf": 22990
-      },
       {
         "date": "2026-09-13",
         "price_huf": 22990
@@ -542,6 +538,10 @@
       {
         "date": "2026-10-11",
         "price_huf": 22990
+      },
+      {
+        "date": "2026-10-12",
+        "price_huf": 25793
       }
     ]
   },
@@ -552,14 +552,10 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 12,
+    "offer_count": 11,
     "new_available_count": 3,
-    "last_seen": "2026-10-11T22:32:03.323749+00:00",
+    "last_seen": "2026-10-12T01:44:59.309163+00:00",
     "price_history": [
-      {
-        "date": "2026-09-12",
-        "price_huf": 23990
-      },
       {
         "date": "2026-09-13",
         "price_huf": 23990
@@ -674,6 +670,10 @@
       },
       {
         "date": "2026-10-11",
+        "price_huf": 23990
+      },
+      {
+        "date": "2026-10-12",
         "price_huf": 23990
       }
     ]
