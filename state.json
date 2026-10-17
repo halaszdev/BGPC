@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 7,
-    "last_seen": "2026-10-17T20:49:05.608474+00:00",
+    "last_seen": "2026-10-17T22:42:54.578380+00:00",
     "price_history": [
       {
         "date": "2026-09-18",
@@ -151,8 +151,8 @@
     "best_condition": "új",
     "best_status": "raktáron új",
     "offer_count": 12,
-    "new_available_count": 7,
-    "last_seen": "2026-10-17T20:49:06.327307+00:00",
+    "new_available_count": 6,
+    "last_seen": "2026-10-17T22:42:56.617661+00:00",
     "price_history": [
       {
         "date": "2026-09-18",
@@ -283,9 +283,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 14,
-    "new_available_count": 9,
-    "last_seen": "2026-10-17T20:49:07.036679+00:00",
+    "offer_count": 13,
+    "new_available_count": 8,
+    "last_seen": "2026-10-17T22:42:57.629049+00:00",
     "price_history": [
       {
         "date": "2026-09-18",
@@ -410,18 +410,18 @@
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-10-17T00:25:04.910493+00:00"
+    "last_email_sent": "2026-10-17T22:43:02.223824+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
     "page_title": "A tudattalan mélyén társasjáték",
-    "best_price_huf": 25793,
+    "best_price_huf": 22990,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 11,
-    "new_available_count": 4,
-    "last_seen": "2026-10-17T20:49:07.900906+00:00",
+    "offer_count": 12,
+    "new_available_count": 5,
+    "last_seen": "2026-10-17T22:42:59.462199+00:00",
     "price_history": [
       {
         "date": "2026-09-18",
@@ -541,20 +541,20 @@
       },
       {
         "date": "2026-10-17",
-        "price_huf": 25793
+        "price_huf": 22990
       }
     ]
   },
   "https://tarsasjatekok.com/tarsasjatek/homalyrev-az-oroszlanfalka-2020": {
     "name": "Homályrév",
     "page_title": "Homályrév: Az oroszlánfalka társasjáték",
-    "best_price_huf": 24990,
+    "best_price_huf": 23990,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 11,
-    "new_available_count": 2,
-    "last_seen": "2026-10-17T20:49:08.628403+00:00",
+    "offer_count": 12,
+    "new_available_count": 3,
+    "last_seen": "2026-10-17T22:43:00.923240+00:00",
     "price_history": [
       {
         "date": "2026-09-18",
@@ -674,7 +674,7 @@
       },
       {
         "date": "2026-10-17",
-        "price_huf": 24990
+        "price_huf": 23990
       }
     ]
   }
