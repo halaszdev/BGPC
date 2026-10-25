@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 7,
-    "last_seen": "2026-10-25T13:50:14.486045+00:00",
+    "last_seen": "2026-10-25T14:15:55.274817+00:00",
     "price_history": [
       {
         "date": "2026-09-26",
@@ -152,7 +152,7 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 7,
-    "last_seen": "2026-10-25T13:50:15.452262+00:00",
+    "last_seen": "2026-10-25T14:15:56.047868+00:00",
     "price_history": [
       {
         "date": "2026-09-26",
@@ -285,7 +285,7 @@
     "best_status": "raktáron új",
     "offer_count": 15,
     "new_available_count": 10,
-    "last_seen": "2026-10-25T13:50:16.917787+00:00",
+    "last_seen": "2026-10-25T14:15:56.883544+00:00",
     "price_history": [
       {
         "date": "2026-09-26",
@@ -421,7 +421,7 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 6,
-    "last_seen": "2026-10-25T13:50:18.630776+00:00",
+    "last_seen": "2026-10-25T14:15:57.694923+00:00",
     "price_history": [
       {
         "date": "2026-09-26",
@@ -554,7 +554,7 @@
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 3,
-    "last_seen": "2026-10-25T13:50:20.697566+00:00",
+    "last_seen": "2026-10-25T14:15:58.529797+00:00",
     "price_history": [
       {
         "date": "2026-09-26",
@@ -677,5 +677,17 @@
         "price_huf": 23990
       }
     ]
+  },
+  "https://tarsasjatekok.com/tarsasjatek/szellemek-szigete-2017": {
+    "name": "Szellemek szigete",
+    "page_title": "Szellemek szigete társasjáték",
+    "best_price_huf": null,
+    "best_availability": null,
+    "best_condition": null,
+    "best_status": null,
+    "offer_count": 8,
+    "new_available_count": 0,
+    "last_seen": "2026-10-25T14:15:59.474950+00:00",
+    "price_history": []
   }
 }
