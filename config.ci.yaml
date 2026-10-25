@@ -9,6 +9,8 @@ games:
     url: "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022"
   - name: Homályrév 
     url: https://tarsasjatekok.com/tarsasjatek/homalyrev-az-oroszlanfalka-2020
+  - name: "Szellemek szigete"
+    url: "https://tarsasjatekok.com/tarsasjatek/szellemek-szigete-2017"
  
 smtp:
   host: smtp.gmail.com
