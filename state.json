@@ -8,12 +8,8 @@
     "best_status": "raktáron új",
     "offer_count": 10,
     "new_available_count": 7,
-    "last_seen": "2026-11-03T21:43:19.227105+00:00",
+    "last_seen": "2026-11-04T01:42:25.009423+00:00",
     "price_history": [
-      {
-        "date": "2026-10-05",
-        "price_huf": 21990
-      },
       {
         "date": "2026-10-06",
         "price_huf": 21990
@@ -129,6 +125,10 @@
       {
         "date": "2026-11-03",
         "price_huf": 21990
+      },
+      {
+        "date": "2026-11-04",
+        "price_huf": 21990
       }
     ]
   },
@@ -152,12 +152,8 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 7,
-    "last_seen": "2026-11-03T21:43:20.084697+00:00",
+    "last_seen": "2026-11-04T01:42:27.175307+00:00",
     "price_history": [
-      {
-        "date": "2026-10-05",
-        "price_huf": 10649
-      },
       {
         "date": "2026-10-06",
         "price_huf": 10649
@@ -273,6 +269,10 @@
       {
         "date": "2026-11-03",
         "price_huf": 10649
+      },
+      {
+        "date": "2026-11-04",
+        "price_huf": 10649
       }
     ]
   },
@@ -285,12 +285,8 @@
     "best_status": "raktáron új",
     "offer_count": 14,
     "new_available_count": 9,
-    "last_seen": "2026-11-03T21:43:20.946371+00:00",
+    "last_seen": "2026-11-04T01:42:28.991351+00:00",
     "price_history": [
-      {
-        "date": "2026-10-05",
-        "price_huf": 23490
-      },
       {
         "date": "2026-10-06",
         "price_huf": 23490
@@ -406,11 +402,15 @@
       {
         "date": "2026-11-03",
         "price_huf": 23490
+      },
+      {
+        "date": "2026-11-04",
+        "price_huf": 23490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-10-28T00:59:37.244516+00:00"
+    "last_email_sent": "2026-11-04T01:42:34.192729+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
@@ -421,12 +421,8 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 6,
-    "last_seen": "2026-11-03T21:43:22.970519+00:00",
+    "last_seen": "2026-11-04T01:42:30.771851+00:00",
     "price_history": [
-      {
-        "date": "2026-10-05",
-        "price_huf": 22990
-      },
       {
         "date": "2026-10-06",
         "price_huf": 22990
@@ -541,6 +537,10 @@
       },
       {
         "date": "2026-11-03",
+        "price_huf": 22990
+      },
+      {
+        "date": "2026-11-04",
         "price_huf": 22990
       }
     ]
@@ -554,12 +554,8 @@
     "best_status": "raktáron új",
     "offer_count": 13,
     "new_available_count": 3,
-    "last_seen": "2026-11-03T21:43:25.680318+00:00",
+    "last_seen": "2026-11-04T01:42:31.604068+00:00",
     "price_history": [
-      {
-        "date": "2026-10-05",
-        "price_huf": 23990
-      },
       {
         "date": "2026-10-06",
         "price_huf": 23990
@@ -675,6 +671,10 @@
       {
         "date": "2026-11-03",
         "price_huf": 23990
+      },
+      {
+        "date": "2026-11-04",
+        "price_huf": 23990
       }
     ]
   },
@@ -687,7 +687,7 @@
     "best_status": null,
     "offer_count": 8,
     "new_available_count": 0,
-    "last_seen": "2026-11-03T21:43:26.548058+00:00",
+    "last_seen": "2026-11-04T01:42:32.388398+00:00",
     "price_history": []
   }
 }
