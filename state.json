@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 8,
     "new_available_count": 6,
-    "last_seen": "2026-11-19T16:50:02.859003+00:00",
+    "last_seen": "2026-11-19T23:17:08.485814+00:00",
     "price_history": [
       {
         "date": "2026-10-21",
@@ -279,13 +279,13 @@
   "https://tarsasjatekok.com/tarsasjatek/vilagrend-2024": {
     "name": "Világrend",
     "page_title": "Világrend társasjáték",
-    "best_price_huf": 25490,
+    "best_price_huf": 23490,
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 13,
-    "new_available_count": 9,
-    "last_seen": "2026-11-19T16:50:04.863732+00:00",
+    "offer_count": 15,
+    "new_available_count": 10,
+    "last_seen": "2026-11-19T23:17:09.872124+00:00",
     "price_history": [
       {
         "date": "2026-10-21",
@@ -405,12 +405,12 @@
       },
       {
         "date": "2026-11-19",
-        "price_huf": 25490
+        "price_huf": 23490
       }
     ]
   },
   "_meta": {
-    "last_email_sent": "2026-11-19T00:22:31.929831+00:00"
+    "last_email_sent": "2026-11-19T23:17:17.598883+00:00"
   },
   "https://tarsasjatekok.com/tarsasjatek/a-tudattalan-melyen-2022": {
     "name": "Tudattalan mélyén",
@@ -421,7 +421,7 @@
     "best_status": "raktáron új",
     "offer_count": 11,
     "new_available_count": 3,
-    "last_seen": "2026-11-19T16:50:06.795104+00:00",
+    "last_seen": "2026-11-19T23:17:11.435032+00:00",
     "price_history": [
       {
         "date": "2026-10-21",
@@ -554,7 +554,7 @@
     "best_status": "raktáron új",
     "offer_count": 11,
     "new_available_count": 3,
-    "last_seen": "2026-11-19T16:50:07.743503+00:00",
+    "last_seen": "2026-11-19T23:17:13.888564+00:00",
     "price_history": [
       {
         "date": "2026-10-21",
@@ -687,7 +687,7 @@
     "best_status": null,
     "offer_count": 8,
     "new_available_count": 0,
-    "last_seen": "2026-11-19T16:50:08.727092+00:00",
+    "last_seen": "2026-11-19T23:17:16.309201+00:00",
     "price_history": []
   }
 }
