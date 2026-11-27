@@ -8,12 +8,8 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 6,
-    "last_seen": "2026-11-26T23:11:07.402390+00:00",
+    "last_seen": "2026-11-27T05:08:05.439522+00:00",
     "price_history": [
-      {
-        "date": "2026-10-28",
-        "price_huf": 21990
-      },
       {
         "date": "2026-10-29",
         "price_huf": 21990
@@ -128,6 +124,10 @@
       },
       {
         "date": "2026-11-26",
+        "price_huf": 22990
+      },
+      {
+        "date": "2026-11-27",
         "price_huf": 22990
       }
     ]
@@ -283,14 +283,10 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 15,
+    "offer_count": 14,
     "new_available_count": 8,
-    "last_seen": "2026-11-26T23:11:08.027957+00:00",
+    "last_seen": "2026-11-27T05:08:07.627386+00:00",
     "price_history": [
-      {
-        "date": "2026-10-28",
-        "price_huf": 23490
-      },
       {
         "date": "2026-10-29",
         "price_huf": 23490
@@ -405,6 +401,10 @@
       },
       {
         "date": "2026-11-26",
+        "price_huf": 25490
+      },
+      {
+        "date": "2026-11-27",
         "price_huf": 25490
       }
     ]
@@ -419,14 +419,10 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 13,
-    "new_available_count": 4,
-    "last_seen": "2026-11-26T23:11:09.616430+00:00",
+    "offer_count": 12,
+    "new_available_count": 3,
+    "last_seen": "2026-11-27T05:08:09.530467+00:00",
     "price_history": [
-      {
-        "date": "2026-10-28",
-        "price_huf": 22990
-      },
       {
         "date": "2026-10-29",
         "price_huf": 22990
@@ -541,6 +537,10 @@
       },
       {
         "date": "2026-11-26",
+        "price_huf": 25793
+      },
+      {
+        "date": "2026-11-27",
         "price_huf": 25793
       }
     ]
@@ -687,7 +687,7 @@
     "best_status": null,
     "offer_count": 9,
     "new_available_count": 0,
-    "last_seen": "2026-11-26T23:11:11.645638+00:00",
+    "last_seen": "2026-11-27T05:08:11.227524+00:00",
     "price_history": []
   }
 }
