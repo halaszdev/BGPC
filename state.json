@@ -8,7 +8,7 @@
     "best_status": "raktáron új",
     "offer_count": 9,
     "new_available_count": 6,
-    "last_seen": "2026-11-27T15:00:57.972869+00:00",
+    "last_seen": "2026-11-27T23:23:55.314242+00:00",
     "price_history": [
       {
         "date": "2026-10-29",
@@ -283,9 +283,9 @@
     "best_availability": "raktáron",
     "best_condition": "új",
     "best_status": "raktáron új",
-    "offer_count": 14,
+    "offer_count": 15,
     "new_available_count": 8,
-    "last_seen": "2026-11-27T15:00:58.810135+00:00",
+    "last_seen": "2026-11-27T23:23:56.853187+00:00",
     "price_history": [
       {
         "date": "2026-10-29",
@@ -421,7 +421,7 @@
     "best_status": "raktáron új",
     "offer_count": 12,
     "new_available_count": 3,
-    "last_seen": "2026-11-27T15:00:59.709529+00:00",
+    "last_seen": "2026-11-27T23:23:57.560317+00:00",
     "price_history": [
       {
         "date": "2026-10-29",
@@ -554,7 +554,7 @@
     "best_status": "raktáron új",
     "offer_count": 14,
     "new_available_count": 2,
-    "last_seen": "2026-11-27T15:01:01.494960+00:00",
+    "last_seen": "2026-11-27T23:23:59.882997+00:00",
     "price_history": [
       {
         "date": "2026-10-29",
@@ -687,7 +687,7 @@
     "best_status": null,
     "offer_count": 9,
     "new_available_count": 0,
-    "last_seen": "2026-11-27T15:01:02.609421+00:00",
+    "last_seen": "2026-11-27T23:24:01.976250+00:00",
     "price_history": []
   }
 }
